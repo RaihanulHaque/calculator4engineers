@@ -130,8 +130,7 @@ def isPrime_or_Composite(n):
 
 url = 'https://calculator4engineers.com/wp-json/wp/v2'
 header = authenticate()
-n = 78276
-# image_list = generateImages(n)[:-1]
+n = 7824
 treeImages = generateImages(n)['TreeFiles']
 divisionImages = generateImages(n)['DivisionFiles']
 bannerImages = generateImages(n)['Banners']
