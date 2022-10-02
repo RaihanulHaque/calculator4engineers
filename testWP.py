@@ -130,7 +130,7 @@ def isPrime_or_Composite(n):
 
 url = 'https://calculator4engineers.com/wp-json/wp/v2'
 header = authenticate()
-n = 7824
+n = 10365
 treeImages = generateImages(n)['TreeFiles']
 divisionImages = generateImages(n)['DivisionFiles']
 bannerImages = generateImages(n)['Banners']
@@ -320,7 +320,7 @@ content = content + wp_h3("7. What is a Composite Number?")
 content = content + \
     wp_paragraph(
         "If a positive integer number has more than two factors, it can be called a composite number.")
-content = content + wp_h3("What are the factors of a prime number?")
+content = content + wp_h3("8. What are the factors of a prime number?")
 content = content + wp_paragraph("They are 1 & the number itself.")
 #################################################################################################################
 
