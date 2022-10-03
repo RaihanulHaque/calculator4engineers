@@ -33,7 +33,7 @@ url = 'https://calculator4engineers.com/wp-json/wp/v2'
 posttitle = "Automation test 101"
 postslug = "automation_test_101"
 postcontent = "This post is created by python script for testing purpose"
-content = "<h2>Rahi</h2><a href="'#'">I am Ironman</a>"
+content = "Baka<h2>Rahi</h2><a href="'#'">I am Ironman</a>"
 post = {
     'title': posttitle,
     'slug': postslug,

@@ -111,7 +111,7 @@ def createTreeStructure(n: int):
     font = cv2.FONT_HERSHEY_SIMPLEX
     items = primeFactors(n)
     height = int(60 * 4 * (len(items) + 1))
-    width = int((len(items) + 2) * 4 * 60)
+    width = int((len(items) + 3) * 4 * 60)
     radius = 60
     centerX = int(width/2) - radius*2
     # centerX = radius*4
@@ -154,22 +154,27 @@ def createDivisionStructure(n):
     items = primeFactors(n)
     height = int((len(items) + 2) * 90) + 200
     logoPadding = 250
-    width = 550 + int(len(items)*45) + logoPadding
+    width = 800 + int(len(items)*30) + logoPadding
     npImg = np.zeros(shape=(height, width, 3), dtype=np.uint16)
     logoImg = loadLogo()
     npImg[:, :, :] = 255
-    textX = 100
-    textY = 150
+    textX = 200
+    textY = 200
 
     i = 0
     increaseFactor = 90
     for key in items:
+        fontAdjustment2 = 30
+        fontAdjustmentFactor = len(str(items[key])) - 1
+        print(fontAdjustmentFactor)
+        fontAdjustment2 = fontAdjustment2 * fontAdjustmentFactor
+
         cv2.putText(npImg, text=f"{key}",
-                    org=(textX + logoPadding, textY + i * increaseFactor), fontFace=font,
+                    org=(textX + 150, textY + i * increaseFactor), fontFace=font,
                     fontScale=fontScale, color=color1, thickness=3)
         cv2.line(npImg,
-                 pt1=(250, textY - 50),
-                 pt2=(250, textY + i * increaseFactor),
+                 pt1=(textX + 100, textY - 50),
+                 pt2=(textX + 100, textY + i * increaseFactor),
                  color=(0, 0, 0),
                  thickness=3
                  )
@@ -177,7 +182,7 @@ def createDivisionStructure(n):
             saveImg(img=npImg[:textY + i * increaseFactor + 100],
                     n=n, type="division", step=str(i))
         cv2.putText(npImg, text=f"{items[key]}",
-                    org=(textX, textY + i * increaseFactor), fontFace=font,
+                    org=(textX - fontAdjustment2, textY + i * increaseFactor), fontFace=font,
                     fontScale=fontScale, color=(255, 102, 0), thickness=3)
         cv2.line(npImg,
                  pt1=(int(textX/2), int(textY + 20 + i*increaseFactor)),
@@ -188,11 +193,11 @@ def createDivisionStructure(n):
         i += 1
 
     cv2.putText(npImg, text=f"1",
-                org=(textX+250, textY + i * increaseFactor), fontFace=font,
+                org=(textX+150, textY + i * increaseFactor), fontFace=font,
                 fontScale=fontScale, color=color1, thickness=3)
     cv2.line(npImg,
-             pt1=(250, textY - 50),
-             pt2=(250, textY + i * increaseFactor),
+             pt1=(textX + 100, textY - 50),
+             pt2=(textX + 100, textY + i * increaseFactor),
              color=(0, 0, 0),
              thickness=3
              )
@@ -282,7 +287,8 @@ def generateImages(n: int):
     arr = {}
 
     arr["TreeFiles"] = [i for i in createTreeStructure(n)]
-    arr["TreeFiles"].pop()
+    if (len(arr["TreeFiles"]) > 1):
+        arr["TreeFiles"].pop()
     arr["DivisionFiles"] = [i for i in createDivisionStructure(n)]
     arr["Banners"] = [i for i in createBanner(n)]
     # arr.__repr__()
@@ -292,7 +298,7 @@ def generateImages(n: int):
 fileNames = []
 
 if __name__ == "__main__":
-    n = 840
+    n = 97
     time1 = time.perf_counter()
     # createTreeStructure(n)
     # createDivisionStructure(n)
