@@ -166,7 +166,7 @@ def createDivisionStructure(n):
     for key in items:
         fontAdjustment2 = 30
         fontAdjustmentFactor = len(str(items[key])) - 1
-        print(fontAdjustmentFactor)
+        # print(fontAdjustmentFactor) # Baka
         fontAdjustment2 = fontAdjustment2 * fontAdjustmentFactor
 
         cv2.putText(npImg, text=f"{key}",
