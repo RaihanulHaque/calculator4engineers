@@ -465,7 +465,7 @@ for i in range(0, len(numbers)):
         # 'slug': postslug,
         'content': content,
         'status': 'publish',
-        # 'author':'235',
+        'author': random.choice(['1', '2', '4', '5', '6']),
         'publish': 'standard',
         'date': time,
         'categories': '4',

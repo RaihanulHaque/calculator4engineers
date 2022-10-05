@@ -115,38 +115,15 @@ class Post:
         return f"<strong>{text}</strong>"
 
     def prepareTitle(self):
-        title = f"Prime Factorization of {self.n}: Solved with Images"
+        title = f"Prime Factorization of {self.n}: Division, Factor Tree Methods"
         return title
 
     def prepareIntro(self):
         p1 = self.wp_paragraph(
-            f"{self.multi_primef}= {self.n}. So, the <strong>prime factors</strong> of {self.n} are {self.str_primef}.")
+            f"{self.multi_primef} = {self.n}. So, the prime factors of {self.n} are {self.str_primef}.")
         p2 = self.wp_paragraph(
-            f"{self.n} can be written as the product of {self.str_primef}. So, {self.str_primef} are the <strong>factors</strong> of {self.n}. They are <strong>prime numbers</strong> as well. Thus, {self.str_primef} become the <strong>prime factors</strong> of {self.n}.")
+            f"If you multiply the prime numbers {self.str_primef}, you will obtain {self.n}. The prime factors of {self.n} are therefore {self.str_primef}.")
         intro = p1 + p2
-
-        intro += self.wp_table(
-            f"""<tr>
-                    <td>Prime Factors</td><td>{self.str_primef}</td>
-                </tr>
-                <tr>
-                    <td>Product of Prime Factor</td><td>{self.multi_primef}</td>
-                </tr>
-                <tr>
-                    <td>Exponential Form</td><td>{self.exponential(self.primef)}</td>
-                </tr>
-                <tr>
-                    <td>Total Number of Factors</td><td>{len(self.primef)}</td>
-                </tr>
-                <tr>
-                    <td>Largest Prime Factor</td><td>{max(self.primef)}</td>
-                </tr>
-                <tr>
-                    <td>Smallest Prime Factor</td><td>{min(self.primef)}</td>
-                </tr>
-                <tr>
-                    <td>Closest Prime Numbers</td><td>{self.nearestPrime(self.n)}</td>
-                </tr>""")
         return intro
 
     def prepareTheory(self):
@@ -155,7 +132,7 @@ class Post:
         h = self.wp_h2("Prime Factors by Definition")
         post += h
 
-        p = self.wp_paragraph("The term factors indicate those integers which divide a number in such a way that the remainder becomes 0. Contrarily, the multipliers of a product can be depicted as the factors of that product. But remember, a factor mustn’t be a fraction number. So, we can use only the integers as the multipliers. If the factors of a number are prime numbers, then they are called prime factors.")
+        p = self.wp_paragraph("We should become familiar with the term \"prime factors\" before learning how to calculate them. What are prime factors ? Why are they known as prime factors ? A product's factors can be thought of as the multipliers of that product. And they can be referred to as prime factors if the multipliers are prime values. However, remember that a factor cannot be a fractional number. Therefore, only whole numbers may be used as multipliers. So, we can say, a number's factors are referred to be prime factors if they are prime numbers.")
         post += p
 
         c = self.wp_paragraph_center("105 = 3 x 5 x 7")
@@ -169,20 +146,20 @@ class Post:
         post += h
 
         p = self.wp_paragraph(
-            "The process of determining factors is known as factorization.")
+            "Finding all the integers that divide a given number perfectly is a technique known as factorization. We can calculate all those factors using various techniques. But keep in mind that both the provided number and the divisors must be integers.")
         post += p
 
         h = self.wp_h2("What is Prime Factorization?")
         post += h
 
         p = self.wp_paragraph(
-            "Prime factorization is a type of factorization where we determine only those factors which are prime numbers.")
+            "Prime factorization is the technique of identifying prime factors.")
         post += p
 
         h = self.wp_h2("Formula of Prime Factor")
         post += h
 
-        p = self.wp_paragraph("It is possible to write any composite number as the product of powers of prime numbers. When a number is written as the product of multiple prime numbers, the process is called prime factorization. Mathematical expression for prime factors:")
+        p = self.wp_paragraph("A prime factor must be both a factor of the supplied number and a prime number. Basically, by decomposing the provided number, prime factors can be found. Generally, we show our supplied number as the result of prime numbers combined with their respective orders. These prime numbers are definitely the given number's prime factors. Mathematical expression for prime factors:")
         post += p
 
         c = self.wp_paragraph(
@@ -199,23 +176,26 @@ class Post:
 
     def howtoCalculateList(self):
         post = ""
-        post += self.wp_h2(f"How to Calculate the Prime Factors of {n}?")
+        post += self.wp_h2(
+            f"How to Find the Prime Factors of {n}?")
         post += self.wp_paragraph(
-            "Prime factors can be determined in several ways. Two of the most common methods are:")
-        post += f"<!-- wp:list --><ul><li>Factor tree method.</li><li>Division method.</li></ul><!-- /wp:list -->"
+            "Prime factors can be found in several ways. Two of the most common methods are::")
+        post += f"<!-- wp:list --><ul><li>Factor Tree Method. </li><li>Division Method.</li></ul><!-- /wp:list -->"
         return post
 
     def factorTree(self):
         post = ""
         post += self.wp_h3("Factor Tree Method")
+
         p1 = self.wp_paragraph(
-            "Here, the target number serves as the tree's root, while the factors are its branches. For this reason, we refer to it as the Factor Tree Approach.")
+            "Factor tree method, which mostly relies on diagrams. This term was chosen because the diagram produced by the factor tree method resembles a tree. The base of the tree is the supplied integer, and the branches are the factors which are graphically linked using diagonals.")
         post += p1
 
         image = self.image_add_tree()
         post += image
 
-        p2 = self.wp_paragraph("In this case, we'll represent the supplied number as the root of a tree and its factors as their respective branches. We'll use diagonals to graphically represent the relationship between the two variables and the tree structures. We'll extract just prime factors from the tree. By breaking it down into manageable chunks, we can accomplish it.")
+        p2 = self.wp_paragraph(
+            "The top of each branch in this technique is where the prime factors are located. We can execute it by dividing it into small steps.")
         post += p2
 
         return post
