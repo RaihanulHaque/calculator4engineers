@@ -177,7 +177,7 @@ class Post:
     def howtoCalculateList(self):
         post = ""
         post += self.wp_h2(
-            f"How to Find the Prime Factors of {n}?")
+            f"How to Find the Prime Factors of {self.n}?")
         post += self.wp_paragraph(
             "Prime factors can be found in several ways. Two of the most common methods are::")
         post += f"<!-- wp:list --><ul><li>Factor Tree Method. </li><li>Division Method.</li></ul><!-- /wp:list -->"
@@ -209,6 +209,8 @@ if __name__ == "__main__":
     # postHtml += submitWP.title
     postHtml += post.intro
     postHtml += post.theory
+    postHtml += post.howtocalculatelist
+    postHtml += post.factorTree
     # postHtml += "</html>"
 
     with open("view.html", "w") as htmlFile:
