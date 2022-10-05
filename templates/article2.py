@@ -191,11 +191,11 @@ class Post:
             "Factor tree method, mainly a diagram based method. The reason behind this name is because  the diagram we found in the factor tree method looks like a tree. The given number is the root and prime factors are the branches of the tree. In this method, the prime factors sit at the top of every branch.")
         post += p1
 
-        # image = self.image_add_tree()
-        # post += image
+        image = self.image_add_tree()
+        post += image
 
-        # p2 = self.wp_paragraph("In this case, we'll represent the supplied number as the root of a tree and its factors as their respective branches. We'll use diagonals to graphically represent the relationship between the two variables and the tree structures. We'll extract just prime factors from the tree. By breaking it down into manageable chunks, we can accomplish it.")
-        # post += p2
+        p2 = self.wp_paragraph("In this case, we'll represent the supplied number as the root of a tree and its factors as their respective branches. We'll use diagonals to graphically represent the relationship between the two variables and the tree structures. We'll extract just prime factors from the tree. By breaking it down into manageable chunks, we can accomplish it.")
+        post += p2
 
         return post
 

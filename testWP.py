@@ -268,7 +268,7 @@ for i in range(0, len(numbers)):
     if primef[0] == 2:
         content = content + \
             wp_paragraph(
-                f"With no leftover, {n} is divided by 2 in this instance.Therefore, the first two factors of {n} will be {primef[0]} and {left[1]}.We would continue exploring until we discovered a prime number that exactly divided {n} if it wasn't divisible by 2. ") + image_upload(treeImages[0])
+                hold + f"With no leftover, {n} is divided by 2 in this instance.Therefore, the first two factors of {n} will be {primef[0]} and {left[1]}.We would continue exploring until we discovered a prime number that exactly divided {n} if it wasn't divisible by 2. ") + image_upload(treeImages[0])
     else:
         content = content + \
             wp_paragraph(
