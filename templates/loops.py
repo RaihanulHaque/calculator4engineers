@@ -6,7 +6,7 @@ import base64
 import json
 
 
-class Ftree:
+class FactorTree:
     def __init__(self, n, treeImages):
         self.n = n
         # self.index = index
@@ -44,18 +44,18 @@ class Ftree:
         left.append(1)
         return primef, left
 
-    # def image_upload(self, path):
-    #     header = self.authenticate()
-    #     url = 'https://calculator4engineers.com/wp-json/wp/v2'
-    #     media = {'file': open(path, 'rb')}
-    #     image = requests.post(url+'/media', headers=header, files=media)
-    #     post_id = json.loads(image.content.decode('utf-8'))['id']
-    #     image_link = image.json()['guid']['rendered']
-    #     locString = f"<!-- wp:image {{\"id\":{str(post_id)},\"sizeSlug\":\"full\",\"linkDestination\":\"none\" }} -->"
-    #     locString += f"<figure class=\"wp-block-image size-full\"><img src=\"{image_link}\" alt=\"\" class=\"wp-image-{str(post_id)}\"/></figure>"
-    #     locString += "<!-- /wp:image -->"
-    #     code = locString
-    #     return code
+    def image_upload(self, path):
+        header = self.authenticate()
+        url = 'https://calculator4engineers.com/wp-json/wp/v2'
+        media = {'file': open(path, 'rb')}
+        image = requests.post(url+'/media', headers=header, files=media)
+        post_id = json.loads(image.content.decode('utf-8'))['id']
+        image_link = image.json()['guid']['rendered']
+        locString = f"<!-- wp:image {{\"id\":{str(post_id)},\"sizeSlug\":\"full\",\"linkDestination\":\"none\" }} -->"
+        locString += f"<figure class=\"wp-block-image size-full\"><img src=\"{image_link}\" alt=\"\" class=\"wp-image-{str(post_id)}\"/></figure>"
+        locString += "<!-- /wp:image -->"
+        code = locString
+        return code
 
     def link_previous(self, numbers, index):
         code = wp_paragraph(
@@ -101,22 +101,22 @@ class Ftree:
         initialStep = []
         initialStepBy2 = []
         initialStepNotBy2 = []
-        loopInsideRandomTring = []
+        lastStep = []
         treeImages = self.treeImages
         content = ""
 
 ######################################INITIAL STEP#########################################################################
 
         initialStep.append(
-            f"Before we can begin to factor a given number, we need to write it down. {n} is the given number in this context. Get the first two factors of the number {n}. We'll begin with the smallest possible number, which is 2 (Note that we didn't pick 1, since every integer is divisible by both 1 and itself). ")
+            f"Before we can begin to factor a given number, we need to write it down. {n} is the given number in this context. Get the first two factors of the number {n}. We'll begin with the smallest possible number, which is 2 (Note that we didn't pick 1, since every integer is divisible by both 1 and itself).<br>")
         initialStep.append(
-            f"Let’s take {n} as our given number. Now, we’ll write the root first. Then we’ll draw two arrows to link the first to branches or factors with the root. We’ll start trying from 2 and continue until we find a number that divides {n} exactly.")
+            f"Let’s take {n} as our given number. Now, we’ll write the root first. Then we’ll draw two arrows to link the first to branches or factors with the root. We’ll start trying from 2 and continue until we find a number that divides {n} exactly.<br>")
         initialStep.append(
-            f"{n} is the given number whose factors are to be found. We’ll try to find its smallest factor which isn’t 1 as 1 is the divisor of every number & it isn’t a prime number. So let's begin with number 2.")
-        initialStep.append(f"Let's use the given number, {n}. We'll now start by writing the root. Then, we'll draw two arrows to connect the first to the root's branches or contributing elements. Starting with 2, we'll keep trying until we find a number that divides {n} perfectly. (Note that we didn't take 1 because every number can be divided by both 1 and the number itself).")
-        initialStep.append(f"{n} is the targeted number whose factors are to be determined. We have to find the first two factors of {n}. We'll find if 2 is a factor of {n} because 2 is the smallest possible number we have in our hand(Note that we didn't pick 1, since 1 and the number itself are always the two factors of the given number).")
+            f"{n} is the given number whose factors are to be found. We’ll try to find its smallest factor which isn’t 1 as 1 is the divisor of every number & it isn’t a prime number. So let's begin with number 2.<br>")
+        initialStep.append(f"Let's use the given number, {n}. We'll now start by writing the root. Then, we'll draw two arrows to connect the first to the root's branches or contributing elements. Starting with 2, we'll keep trying until we find a number that divides {n} perfectly. (Note that we didn't take 1 because every number can be divided by both 1 and the number itself).<br>")
+        initialStep.append(f"{n} is the targeted number whose factors are to be determined. We have to find the first two factors of {n}. We'll find if 2 is a factor of {n} because 2 is the smallest possible number we have in our hand(Note that we didn't pick 1, since 1 and the number itself are always the two factors of the given number).<br>")
         initialStep.append(
-            f"The target number, for which the factors should be determined, is {n}. We'll try to find such two numbers which we can multiply to get {n} . But we won't use 1 because if we use 1, we have to multiply it with {n} to obtain {n} and it won't decompose our given number. So, we'll check if 2 is a factor of {n} since it's the smallest integer we can use.")
+            f"The target number, for which the factors should be determined, is {n}. We'll try to find such two numbers which we can multiply to get {n} . But we won't use 1 because if we use 1, we have to multiply it with {n} to obtain {n} and it won't decompose our given number. So, we'll check if 2 is a factor of {n} since it's the smallest integer we can use.<br>")
 
 ######################################INITIAL STEP DIVIDED BY 2#########################################################################
 
@@ -142,11 +142,14 @@ class Ftree:
         initialStepNotBy2.append(
             f"Without a remainder, {n} cannot be divided by 2. Since {n} is easily divisible by {primef[0]}, we'll give it a go with {primef[0]} (Note: we would have to continue exploring until we found a prime number that exactly divided {n}). So, as the first two factors of {n}, we'll obtain {primef[0]} and {left[1]}.")
 
-######################################INITIAL STEP DIVIDED BY 2#########################################################################
+######################################LOOP INSIDE RANDOM STRING#########################################################################
+
+        # loopInsideRandomString.append(
+        #     f"Given that 3 is prime whereas 3455 is not, we can factorize 3455 in the same way we did before. The two components of 3455 are hence 5 and 691.")
 
         h4_step = "Step 1"
         content += self.wp_h4(h4_step)
-        # content += self.image_upload(treeImages[0])
+        content += self.image_upload(treeImages[0])
 
         if primef[0] == 2:
             content += self.wp_paragraph(random.choice(initialStep) +
@@ -155,8 +158,20 @@ class Ftree:
             content += self.wp_paragraph(random.choice(initialStep) +
                                          random.choice(initialStepNotBy2))
 
+        if len(primef) > 1:
+            for j in range(1, len(primef)-1):
+                h4_step = f"Step {j+1}"
+                content += self.wp_h4(h4_step)
+                content += self.image_upload(treeImages[j])
+
+                loopInsideRandomString = [
+                    f"Given that {primef[j-1]} is prime whereas {left[j]} is not , we can factorize {left[j]} in the same way we did before. The two components of {left[j]} are hence {primef[j]} and {left[j+1]}.",
+                    f"As {primef[j-1]} is also a prime number, and so, we only need to find the next two factors of {left[j]}. The two factors of {left[j]} are {primef[j]} & {left[j+1]}.",
+                    f"As {primef[j-1]} is a prime number but {left[j]} isn’t, we’ll factorize {left[j]} like the previous one. We’ll get {primef[j]} and {left[j+1]} as the two factors of {left[j]}.",
+                    f"Since {primef[j-1]} is also a prime number, only the next two factors of {left[j]} need to be determined. The two factors of {left[j]} are {primef[j]} & {left[j+1]}.",
+                    f"As {primef[j-1]} is a prime number, it is also our first prime factor. Whereas {left[j]} is not , so we’ve to factorize {left[j]} in the same way we did it for {left[j-1]}. The two components of {left[j]} are hence {primef[j]} and {left[j+1]}.",
+                    f"{primef[j-1]} is a prime number but {left[j]} is not. Thus we must factorize it similarly to how we did for {left[j-1]}. Thus, {primef[j]} & {left[j+1]} are the two factors of {left[j]}."
+                ]
+                content += random.choice(loopInsideRandomString)
+
         return content
-
-
-if __name__ == "__main__":
-    print()

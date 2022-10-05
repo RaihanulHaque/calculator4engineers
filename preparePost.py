@@ -4,7 +4,7 @@ import random
 from primeFactorVisualizer import generateImages
 
 
-n = 10365
+n = 103650
 treeImages = generateImages(n)['TreeFiles']
 p1 = article1.Post(n)
 p2 = article2.Post(n)
@@ -19,11 +19,11 @@ intro = random.choice(posts).intro
 theory = random.choice(posts).theory
 howtocalculatelist = random.choice(posts).howtocalculatelist
 factorTree = random.choice(posts).factorTree
-factorTreeSteps = loops.Ftree(n, treeImages)
+factorTreeSteps = loops.FactorTree(n, treeImages).factorTreeSteps()
 
 
 # content = intro + theory + howtocalculatelist + factorTree + factorTreeSteps
-# content = f"{intro}{theory}{howtocalculatelist}{factorTree}{factorTreeSteps}"
+content = f"{intro}{theory}{howtocalculatelist}{factorTree}{factorTreeSteps}"
 
-# print(submitWP.submit(title, content))
-print(factorTreeSteps)
+print(submitWP.submit(title, content))
+# print(factorTreeSteps.factorTreeSteps())
