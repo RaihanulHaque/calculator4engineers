@@ -6,7 +6,7 @@ import base64
 import json
 
 
-class FactorTree:
+class FactorTreeMethod:
     def __init__(self, n, treeImages):
         self.n = n
         # self.index = index
@@ -35,14 +35,14 @@ class FactorTree:
                 # print(c, end=" ")
                 primef.append(c)
                 left.append(int(n))
-                # str_primef = str_primef+f"{c}, "
-                # multi_primef = multi_primef + f"{c} x "
+                str_primef = str_primef+f"{c}, "
+                multi_primef = multi_primef + f"{c} x "
                 # expo_primef = expo_primef + f"{c}<sup>1</sup> x "
                 n = n / c
             else:
                 c = c + 1
         left.append(1)
-        return primef, left
+        return primef, left, str_primef[:-2], multi_primef[:-2]
 
     def image_upload(self, path):
         header = self.authenticate()
@@ -97,11 +97,12 @@ class FactorTree:
         n = self.n
         # index = self.index
 
-        primef, left = self.primeFactors(n)
+        primef, left, str_primef, multi_primef = self.primeFactors(n)
         initialStep = []
         initialStepBy2 = []
         initialStepNotBy2 = []
         lastStep = []
+        end = []
         treeImages = self.treeImages
         content = ""
 
@@ -142,10 +143,26 @@ class FactorTree:
         initialStepNotBy2.append(
             f"Without a remainder, {n} cannot be divided by 2. Since {n} is easily divisible by {primef[0]}, we'll give it a go with {primef[0]} (Note: we would have to continue exploring until we found a prime number that exactly divided {n}). So, as the first two factors of {n}, we'll obtain {primef[0]} and {left[1]}.")
 
-######################################LOOP INSIDE RANDOM STRING#########################################################################
+######################################LAST STEP#########################################################################
 
-        # loopInsideRandomString.append(
-        #     f"Given that 3 is prime whereas 3455 is not, we can factorize 3455 in the same way we did before. The two components of 3455 are hence 5 and 691.")
+        lastStep = [
+            f"Since {primef[len(primef)-2]} and {left[len(primef)-1]} are both prime numbers, they cannot be factored any further. With that, our factor tree is finished.",
+            f"{primef[len(primef)-2]} & {left[len(primef)-1]} are prime numbers. So, the process ends here & we got our prime factors. Else, we had to continue the process until every branch of the tree ultimately ended as a prime number. {str_primef} are the prime factors we’re looking for (As they’re at the top of the branches of our diagram & no branches are coming out of them).",
+            f"Both {primef[len(primef)-2]} and {left[len(primef)-1]} are prime numbers, so we won’t get anything else rather than 1 & the number itself by factoring them again. So, our factor tree is completed.",
+            f"{primef[len(primef)-2]} & {left[len(primef)-1]} are the two factors of {left[len(primef)-2]}, both of which are prime numbers. This concludes the procedure, and we now have our prime factors. If not , we were to keep going until each branch of the tree resulted in a prime number.",
+            f"Since {primef[len(primef)-2]} and {left[len(primef)-1]} are both prime numbers, it cannot be factored any further. With that, our factor tree is finished.",
+            f"It cannot be factored further because {primef[len(primef)-2]} & {left[len(primef)-1]} are both prime numbers. Our factor tree is complete at this point."
+        ]
+
+######################################END#########################################################################
+        end = [
+            f"From the diagram we get {str_primef} as the prime factors of {n} as those factors can’t be factorized further. <br>We can express like this: {n} = {multi_primef}<br><strong>Note: we need to factorize them until all the factors become prime numbers.</strong>",
+            f"Now express them as the conventional form: {n} = {multi_primef}<br><strong>Note : We didn’t use 1 because it is neither a prime number nor divisible further.</strong>",
+            f"From the diagram we get {str_primef} as the prime factors of {n}. < br > We can express like this: {n} = {multi_primef}<br><strong>Note: we need to factorize them until all the factors become prime numbers.</strong>",
+            f"We can express like this: {n} = {multi_primef}<br><strong>Note: we need to factorize them until all the factors become prime numbers.</strong>",
+            f"From the diagram we get {str_primef} as the prime factors of {n} as those factors can’t be factorized further.<br> We can express like this: {n} = {multi_primef}<br><strong>Note: we need to factorize them until all the factors become prime numbers.</strong>",
+            f"Now, we have to look at those numbers which are the top of the branches because those are our prime factors. So, {str_primef} are our prime factors obtained from the factor tree.<br>We can express like this: {n} = {multi_primef}<br><strong>Note: we need to factorize them until all the factors become prime numbers.</strong>"
+        ]
 
         h4_step = "Step 1"
         content += self.wp_h4(h4_step)
@@ -172,6 +189,246 @@ class FactorTree:
                     f"As {primef[j-1]} is a prime number, it is also our first prime factor. Whereas {left[j]} is not , so we’ve to factorize {left[j]} in the same way we did it for {left[j-1]}. The two components of {left[j]} are hence {primef[j]} and {left[j+1]}.",
                     f"{primef[j-1]} is a prime number but {left[j]} is not. Thus we must factorize it similarly to how we did for {left[j-1]}. Thus, {primef[j]} & {left[j+1]} are the two factors of {left[j]}."
                 ]
-                content += random.choice(loopInsideRandomString)
+                content += self.wp_paragraph(
+                    random.choice(loopInsideRandomString))
+
+            h4_step = f"Step {len(primef)}"
+            content += self.wp_h4(h4_step)
+            # content+=self.image_upload(treeImages[])
+            content += self.wp_paragraph(random.choice(lastStep))
+
+        content += self.wp_paragraph(random.choice(end))
+
+        return content
+
+
+############################################################################################################################
+# Divider
+############################################################################################################################
+
+
+class DivisionMethod:
+    def __init__(self, n, divisionImages):
+        self.n = n
+        # self.index = index
+        self.divisionImages = divisionImages
+        self.content = self.divisionSteps()
+
+    def authenticate(self):
+        user = "Rahi"
+        password = "t5nC 34nz obVc BUzM c1Nt KQnK"
+        creds = user + ':' + password
+        cred_token = base64.b64encode(creds.encode())
+        header = {'Authorization': 'Basic ' + cred_token.decode('utf-8')}
+        return header
+
+    def primeFactors(self, n):
+        c = 2
+        step = 0
+        str_primef = ""
+        multi_primef = ""
+        # expo_primef = ""
+        primef = []
+        left = []
+        while n > 1:
+            step = step + 1
+            if n % c == 0:
+                # print(c, end=" ")
+                primef.append(c)
+                left.append(int(n))
+                str_primef = str_primef+f"{c}, "
+                multi_primef = multi_primef + f"{c} x "
+                # expo_primef = expo_primef + f"{c}<sup>1</sup> x "
+                n = n / c
+            else:
+                c = c + 1
+        left.append(1)
+        return primef, left, str_primef[:-2], multi_primef[:-2]
+
+    def image_upload(self, path):
+        header = self.authenticate()
+        url = 'https://calculator4engineers.com/wp-json/wp/v2'
+        media = {'file': open(path, 'rb')}
+        image = requests.post(url+'/media', headers=header, files=media)
+        post_id = json.loads(image.content.decode('utf-8'))['id']
+        image_link = image.json()['guid']['rendered']
+        locString = f"<!-- wp:image {{\"id\":{str(post_id)},\"sizeSlug\":\"full\",\"linkDestination\":\"none\" }} -->"
+        locString += f"<figure class=\"wp-block-image size-full\"><img src=\"{image_link}\" alt=\"\" class=\"wp-image-{str(post_id)}\"/></figure>"
+        locString += "<!-- /wp:image -->"
+        code = locString
+        return code
+
+    def link_previous(self, numbers, index):
+        code = wp_paragraph(
+            "<strong> Check the first step of these prime factorization examples to better understand how this step is done:</strong>")
+        if index == 0:
+            pass
+        elif index == 1:
+            code += f"<!-- wp:list --><ul><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index-1]}/\">Prime factorization of {numbers[index-1]}</a></li></ul><!-- /wp:list -->"
+        elif index == 2:
+            code += f"<!-- wp:list --><ul><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index-1]}/\">Prime factorization of {numbers[index-1]}</a></li><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index-2]}/\">Prime factorization of {numbers[index-2]}</a></li></ul><!-- /wp:list -->"
+        else:
+            code += f"<!-- wp:list --><ul><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index-1]}/\">Prime factorization of {numbers[index-1]}</a></li><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index-2]}/\">Prime factorization of {numbers[index-2]}</a></li><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index-3]}/\">Prime factorization of {numbers[index-3]}</a></li></ul><!-- /wp:list -->"
+        return code
+
+    def link_next(self, numbers, index):
+        code = wp_paragraph(
+            "<strong>Check the first step of these prime factorization examples to better understand how this step is done:</strong>")
+        if len(numbers)-1 == index:
+            pass
+        elif index == len(numbers)-2:
+            code += f"<!-- wp:list --><ul><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index+1]}/\">Prime factorization of {numbers[index+1]}</a></li></ul><!-- /wp:list -->"
+        elif index == len(numbers)-3:
+            code += f"<!-- wp:list --><ul><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index+1]}/\">Prime factorization of {numbers[index+1]}</a></li><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index+2]}/\">Prime factorization of {numbers[index+2]}</a></li></ul><!-- /wp:list -->"
+        else:
+            code += f"<!-- wp:list --><ul><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index+1]}/\">Prime factorization of {numbers[index+1]}</a></li><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index+2]}/\">Prime factorization of {numbers[index+2]}</a></li><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index+3]}/\">Prime factorization of {numbers[index+3]}</a></li></ul><!-- /wp:list -->"
+
+        return code
+
+    def wp_h3(self, text):
+        return f"<!-- wp:heading {{\"level\":3}} --><h3>{text}</h3><!-- /wp:heading -->"
+
+    def wp_h4(self, text):
+        return f"<!-- wp:heading {{\"level\":4}} --><h4>{text}</h4><!-- /wp:heading -->"
+
+    def wp_paragraph(self, text):
+        return f"<!-- wp:paragraph --><p>{text}</p><!-- /wp:paragraph -->"
+
+    def divisionSteps(self):
+        n = self.n
+        # index = self.index
+
+        primef, left, str_primef, multi_primef = self.primeFactors(n)
+        initialStep = []
+        initialStepBy2 = []
+        initialStepNotBy2 = []
+        lastStep = []
+        end = []
+        divisionImages = self.divisionImages
+        content = ""
+
+######################################INITIAL STEP#########################################################################
+
+        # initialStepBy2 = [
+        #     f"Let’s find out the prime factors of {n} by division method. First we’ll divide the {n} by the smallest prime number 2. And 2 can easily divide {n}. So, we have to move towards the next one. {primef[1]} can divide {left[1]} evenly. So, we’ll divide it by {primef[1]} and get {left[2]} as the quotient.",
+        #     f"To find the prime factors, first write the number {n} on the paper and check if it is divisible by the smallest prime number which is certainly 2 and exactly divides {n} which gives us a quotient of {left[1]}. After that we would look for the next one. Remember the divisor must be a prime number. In the next case {left[1]}, it is evenly divisible by {primef[1]}. The quotient will be {left[2]} after dividing by {primef[1]}.",
+        #     f"Let’s find out the prime factors of {n} by division method. Divide {n} by 2 as it is the smallest prime number. It accurately divides {n}. So next, we would try with {primef[1]} as it is the next prime number which can divide {left[1]} evenly and we’ll get {left[2]} as the quotient.",
+        #     f"Let’s implement the division method on {n} to find out its prime factors. First we’ll try to divide the {n} by 2 as 2 is the smallest prime number. Since 2 can exactly divide {n} with giving us a quotient of {left[1]}, we’ll then try with {primef[1]} for this quotient as {primef[1]} is the next prime number which can divide {left[1]} evenly giving {left[2]} as the quotient."
+
+        # ]
+        initialStepBy2 = [
+            f"Let’s find out the prime factors of {n} by division method. First we’ll divide the {n} by the smallest prime number 2. And 2 can easily divide {n}. This gives us {left[1]} as a quotient. So, we have to move towards the next one.",
+            f"To find the prime factors, first write the number {n} on the paper and check if it is divisible by the smallest prime number which is certainly 2 and exactly divides {n} which gives us a quotient of {left[1]}. After that we would look for the next one. Remember the divisor must be a prime number.",
+            f"Let’s find out the prime factors of {n} by division method. Divide {n} by 2 as it is the smallest prime number. It accurately divides {n}.",
+            f"Let’s implement the division method on {n} to find out its prime factors. First we’ll try to divide the {n} by 2 as 2 is the smallest prime number. Here 2 can exactly divide {n} with giving us a quotient of {left[1]}. So we’ll start looking for next one if it's possible."
+        ]
+
+        initialStepNotBy2 = [
+            f"Let’s find out the prime factors of {n} by division method. First we’ll divide the {n} by the smallest prime number 2. But 2 can’t divide {n} exactly. So, we have to move towards the next one. {primef[0]} can divide {left[0]} evenly. So, we’ll divide it by {primef[0]} and get {left[1]} as the quotient.",
+            f"To find the prime factors, first write the number {n} on the paper and check if it is divisible by the smallest prime number which is certainly 2. If it isn’t, then go for the next one. Remember the divisor must be a prime number & we should start from the smallest. In case {n}, it is evenly divisible by {primef[0]}. The quotient will be {left[1]} after dividing by {primef[0]}.",
+            f"Let’s find out the prime factors of {n} by division method. Divide {n} by 2 as it is the smallest prime number. If 2 can’t divide {n} exactly, try with {primef[0]} as it is the next prime number. {primef[0]} can divide {n} evenly and we’ll get {left[1]} as the quotient.",
+            f"Write the number {n} down first to find its prime factors, then see if it can be divided by the smallest prime number, which is definitely 2. If 2 doesn't divide {n} precisely, move on to the following. Keep in mind that we must begin with the smallest divisor and it has to be a prime number. The number {n} can be divided by {primef[0]} evenly to obtain the quotient of {left[1]}.",
+            f"Let’s implement the division method on {n} to find out its prime factors. First we’ll try to divide the {n} by 2 as 2 is the smallest prime number. But 2 can’t divide {n} exactly. So, we’ll try with {primef[0]} this time as {primef[0]} is the next prime number which can divide {n} evenly giving {left[1]} as the quotient.",
+            f"Let's use the division method to find the prime factors of {n}. As {primef[0]} is the smallest prime number which can divide {n} exactly. Our quotient will be {left[1]}."
+        ]
+
+######################################INITIAL STEP DIVIDED BY 2#########################################################################
+
+
+######################################INITIAL STEP NOT DIVIDED BY 2#########################################################################
+
+
+######################################LAST STEP#########################################################################
+
+        lastStep = [
+            f"Being a prime, {left[len(primef)-1]} can be evenly divided only by itself and the quotient will become 1. A prime factorization of {n} would include all of its divisors.<br><strong>Note: We’ll have to repeat the process until the quotient becomes 1.</strong>",
+            f"As {left[len(primef)-1]} is a prime number, the smallest & only prime number to divide {left[len(primef)-1]} exactly is {left[len(primef)-1]} itself and leaves 1 as quotient. So, we found the quotient 1 & the division method is done. Now it’s time to find the prime factors. And the prime factors are the divisors. Hence, we got {str_primef} as the prime factors of {n}.<br><strong>Note: We’ll have to repeat the process until the quotient becomes 1.</strong>",
+            f"As {left[len(primef)-1]} is a prime number, it can be divided evenly only by itself. Each divisor is a prime {n} factor. The result of multiplying all the divisors is {n}.<br><strong>Note: We’ll have to repeat the process until the quotient becomes 1.</strong>",
+            f"Due to the fact that {left[len(primef)-1]} is a prime number, the only prime number that can divide it exactly is {left[len(primef)-1]} (prime numbers can only be divided by 1 and the number itself). So, we found quotient 1 and completed the division procedure.  The prime factors are the divisors used to divide the number and its quotients.<br><strong>Note: We’ll have to repeat the process until the quotient becomes 1.</strong>",
+            f"Being a prime, {left[len(primef)-1]} can be evenly divided only by itself and the quotient will become 1. A prime factorization of {n} would include all of its divisors.<br><strong>Note: We’ll have to repeat the process until the quotient becomes 1.</strong>",
+            f"Being a prime, {left[len(primef)-1]} can be evenly divided only by itself and the quotient will become 1. So, the process stops here. All the divisors are our prime factors: {str_primef}.<br><strong>Note: We’ll have to repeat the process until the quotient becomes 1.</strong>"
+        ]
+
+######################################END#########################################################################
+
+        h4_step = "Step 1"
+        content += self.wp_h4(h4_step)
+        content += self.image_upload(divisionImages[0])
+
+        if primef[0] == 2:
+            content += self.wp_paragraph(random.choice(initialStepBy2))
+            # phase2 = 2
+            # if len(primef) > 2:
+            #     for j in range(phase2, len(primef)-1):
+            #         h4_step = f"Step {j}"
+            #         content += self.wp_h4(h4_step)
+            #         content += self.image_upload(divisionImages[j])
+
+            #         loopInsideRandomString = [
+            #             f"Now we’ll repeat the exact process for the quotient also. We can divide it by {primef[j]} and {left[j+1]} will be the quotient this time.",
+            #             f"We have to divide the quotient this time by the smallest prime number. {primef[j]} is the smallest prime number we’re looking for to divide the quotient exactly and it offers {left[j+1]} as the quotient this time.",
+            #             f"We'll now carry out the exact same procedure for the {left[j]}. We can divide {left[j]} by {primef[j]} and {left[j+1]} will be the quotient this time.",
+            #             f"Now, divide the quotient by the smallest prime number that it can be divided by. The smallest prime number we need to divide the quotient exactly is {primef[j]}, and it this time provides {left[j+1]} as the quotient.",
+            #             f"We’ll repeat the same process for {left[j]} now. We can divide it by {primef[j]} and we’ll get {left[j+1]} as a quotient.",
+            #             f"Now we’ll divide {left[j]} by {primef[j]} as it is the smallest prime number to divide it exactly. {left[j+1]} is the quotient."
+            #         ]
+
+            #         content += self.wp_paragraph(
+            #             random.choice(loopInsideRandomString))
+
+            #     h4_step = f"Step {len(primef)-1}"
+            #     content += self.wp_h4(h4_step)
+            #     content += self.image_upload(
+            #         divisionImages[len(divisionImages)-1])
+
+            #     content += self.wp_paragraph(random.choice(lastStep))
+
+        else:
+            content += self.wp_paragraph(random.choice(initialStepNotBy2))
+            # phase2 = 1
+            # if len(primef) > 1:
+            #     for j in range(phase2, len(primef)-1):
+            #         h4_step = f"Step {j+1}"
+            #         content += self.wp_h4(h4_step)
+            #         content += self.image_upload(divisionImages[j])
+
+            #         loopInsideRandomString = [
+            #             f"Now we’ll repeat the exact process for the quotient also. We can divide it by {primef[j]} and {left[j+1]} will be the quotient this time.",
+            #             f"We have to divide the quotient this time by the smallest prime number. {primef[j]} is the smallest prime number we’re looking for to divide the quotient exactly and it offers {left[j+1]} as the quotient this time.",
+            #             f"We'll now carry out the exact same procedure for the {left[j]}. We can divide {left[j]} by {primef[j]} and {left[j+1]} will be the quotient this time.",
+            #             f"Now, divide the quotient by the smallest prime number that it can be divided by. The smallest prime number we need to divide the quotient exactly is {primef[j]}, and it this time provides {left[j+1]} as the quotient.",
+            #             f"We’ll repeat the same process for {left[j]} now. We can divide it by {primef[j]} and we’ll get {left[j+1]} as a quotient.",
+            #             f"Now we’ll divide {left[j]} by {primef[j]} as it is the smallest prime number to divide it exactly. {left[j+1]} is the quotient."
+            #         ]
+            #         content += self.wp_paragraph(
+            #             random.choice(loopInsideRandomString))
+
+            #     h4_step = f"Step {len(primef)}"
+            #     content += self.wp_h4(h4_step)
+            #     content += self.image_upload(
+            #         divisionImages[len(divisionImages)-1])
+            #     content += self.wp_paragraph(random.choice(lastStep))
+
+        if len(primef) > 1:
+            for j in range(1, len(primef)-1):
+                h4_step = f"Step {j+1}"
+                content += self.wp_h4(h4_step)
+                content += self.image_upload(divisionImages[j])
+
+                loopInsideRandomString = [
+                    f"Now we’ll repeat the exact process for the quotient also. We can divide it by {primef[j]} and {left[j+1]} will be the quotient this time.",
+                    f"We have to divide the quotient this time by the smallest prime number. {primef[j]} is the smallest prime number we’re looking for to divide the quotient exactly and it offers {left[j+1]} as the quotient this time.",
+                    f"We'll now carry out the exact same procedure for the {left[j]}. We can divide {left[j]} by {primef[j]} and {left[j+1]} will be the quotient this time.",
+                    f"Now, divide the quotient by the smallest prime number that it can be divided by. The smallest prime number we need to divide the quotient exactly is {primef[j]}, and it this time provides {left[j+1]} as the quotient.",
+                    f"We’ll repeat the same process for {left[j]} now. We can divide it by {primef[j]} and we’ll get {left[j+1]} as a quotient.",
+                    f"Now we’ll divide {left[j]} by {primef[j]} as it is the smallest prime number to divide it exactly. {left[j+1]} is the quotient."
+                ]
+                content += self.wp_paragraph(
+                    random.choice(loopInsideRandomString))
+
+            h4_step = f"Step {len(primef)}"
+            content += self.wp_h4(h4_step)
+            content += self.image_upload(divisionImages[len(divisionImages)-1])
+            content += self.wp_paragraph(random.choice(lastStep))
 
         return content

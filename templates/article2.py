@@ -11,8 +11,11 @@ class Post:
         self.title = self.prepareTitle()
         self.intro = self.prepareIntro()
         self.theory = self.prepareTheory()
+        self.formula = self.prepareFormula()
         self.howtocalculatelist = self.howtoCalculateList()
-        self.factorTree = self.factorTree()
+        self.factorTree = self.prepareFactorTree()
+        self.division = self.prepareDivision()
+        self.FAQ = self.prepareFAQ()
 
     def primeFactors(self, n):
         c = 2
@@ -105,6 +108,20 @@ class Post:
         locString += "<!-- /wp:image -->"
         return locString
 
+    def check_squared(self, n):
+        root = sqrt(n)
+        if int(root + 0.5) ** 2 == n:
+            return f"Yes. The square root of {n} is an integer. So it is a square number."
+        else:
+            return f"No. {self.n}'s square root is not an integer. Since it isn't square, it is not."
+
+    def isPrime_or_Composite(self, n):
+        primef, left, str_primef, multi_primef = self.primeFactors(n)
+        if len(primef) > 1:
+            return f"{n} is a composite number."
+        else:
+            return f"{n} is a prime number."
+
     def sub(self, text):
         return f"<sub>{text}</sub>"
 
@@ -156,22 +173,21 @@ class Post:
             "Prime factorization is also a kind of factorization but the only difference is the divisors are prime numbers in this case.")
         post += p
 
-        h = self.wp_h2("Prime Factors’ Formula")
-        post += h
+        return post
 
-        p = self.wp_paragraph("A prime factor must be a prime number as well as a factor of the given number. Basically, prime factors can be found by decomposing our given number. It can be expressed as a product of prime numbers with orders. In general, we represent our given number as a product of prime numbers with their orders. These prime numbers are certainly the prime factors of the given number.")
-        post += p
+    def prepareFormula(self):
+        post = ""
 
-        c = self.wp_paragraph(
+        post += self.wp_h2("Prime Factor's Formula")
+        post += self.wp_paragraph("A prime factor must be a prime number as well as a factor of the given number. Basically, prime factors can be found by decomposing our given number. It can be expressed as a product of prime numbers with orders. In general, we represent our given number as a product of prime numbers with their orders. These prime numbers are certainly the prime factors of the given number.")
+        post += self.wp_paragraph(
             "N = p<sub>f1</sub><sup>a1</sup> +&nbsp; p<sub>f2</sub><sup>a2</sup> +&nbsp; &nbsp; p<sub>f3</sub><sup>a3</sup> + ... ... +&nbsp; p<sub>fn</sub><sup>an</sup>")
-        post += c
 
         p = "N = Any integer number<br>"
         p += "p<sub>f1</sub>, p<sub>f2</sub>, p<sub>f3</sub>, p<sub>fn</sub> = Prime factors<br>"
         p += "a<sub>1</sub>, a<sub>2</sub>, a<sub>3</sub>, a<sub>n</sub> = Orders of prime factors<br>"
         p = self.wp_paragraph(p)
         post += p
-
         return post
 
     def howtoCalculateList(self):
@@ -183,19 +199,65 @@ class Post:
         post += f"<!-- wp:list --><ul><li>Division Method & </li><li>Factor Tree Method.</li></ul><!-- /wp:list -->"
         return post
 
-    def factorTree(self):
+    def prepareFactorTree(self):
         post = ""
         post += self.wp_h3("Factor Tree Method")
 
         p1 = self.wp_paragraph(
             "Factor tree method, mainly a diagram based method. The reason behind this name is because  the diagram we found in the factor tree method looks like a tree. The given number is the root and prime factors are the branches of the tree. In this method, the prime factors sit at the top of every branch.")
-        post += p1
 
         image = self.image_add_tree()
-        post += image
 
         p2 = self.wp_paragraph("In this case, we'll represent the supplied number as the root of a tree and its factors as their respective branches. We'll use diagonals to graphically represent the relationship between the two variables and the tree structures. We'll extract just prime factors from the tree. By breaking it down into manageable chunks, we can accomplish it.")
-        post += p2
+
+        post += p1 + image + p2
+        return post
+
+    def prepareDivision(self):
+        post = ""
+        post += self.wp_h3("Division Method")
+
+        p1 = self.wp_paragraph(
+            "Now we’ll talk about the division method. From the name, we can assume that this method is related to division operation. Actually this method is very simple. You just continue dividing the given number until the quotient becomes 1.")
+
+        image = self.image_add_division()
+
+        p2 = self.wp_paragraph(
+            f"Let’s walk through the details of this process with a given number {self.n}.")
+
+        post += p1 + image + p2
+        return post
+
+    def prepareFAQ(self):
+        post = ""
+        post += self.wp_h2("Most Commonly Asked Questions")
+
+        post += self.wp_h3("1. Are There Negative Factors?")
+        post += self.wp_paragraph("Yes. Factors can also be detrimental. They are 1, 2, 5, 10, -1, -2, -5, and -10, much like the factors of 10. Because we will have 10 if we multiply -10 by -1. The factors of 10 are therefore -10 and -1. However, we tend to primarily consider good factors.")
+
+        post += self.wp_h3(f"2. Is {self.n} a Square Number?")
+        post += self.wp_paragraph(self.check_squared(self.n))
+
+        post += self.wp_h3(f"3. What Is the Square of {self.n}?")
+        post += self.wp_paragraph(f"Square of {self.n} is {self.n*self.n}.")
+
+        post += self.wp_h3(f"4. What Is the Root of {self.n}?")
+        post += self.wp_paragraph(f"Root of {self.n} is {sqrt(self.n)}")
+
+        post += self.wp_h3(
+            f"5. Is {self.n} a prime or a composite number?")
+        post += self.wp_paragraph(self.isPrime_or_Composite(self.n))
+
+        post += self.wp_h3(f"6. How Many Factors Does a Prime Number Have?")
+        post += self.wp_paragraph(
+            "A Prime number has only 2 factors")
+
+        post += self.wp_h3("7. What are the factors of a prime number?")
+        post += self.wp_paragraph("They are 1 & the number itself.")
+
+        post += self.wp_h3("8. What is a Composite Number?")
+        post += self.wp_paragraph(
+            "A positive integer number is referred to as a composite number if it has more than two elements.")
 
         return post
 
