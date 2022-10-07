@@ -59,6 +59,11 @@ for i in range(0, len(numbers)):
     tdelta = timedelta(minutes=random.randrange(10, 20))
     current_time = current_time + tdelta
     time = schedule(current_time)
+    try:
+        WPrequest = submitWP.submit(title, n, content, time, bannerImages)
+        print(f"Number - {i+1} is scheduled at {time} with {WPrequest}")
 
-    WPrequest = submitWP.submit(title, n, content, time, bannerImages)
-    print(f"Number - {i+1} is scheduled at {time} with {WPrequest}")
+    except:
+        with open("errorList.txt", 'a') as error_numbers:
+            print(f"Number - {i+1} is not published")
+            error_numbers.write(f"{i+1} - {numbers[i+1]}")
