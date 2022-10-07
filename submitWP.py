@@ -13,14 +13,16 @@ def authenticate():
     return header
 
 
-def submit(posttitle, content):
+def submit(posttitle, content, time):
     header = authenticate()
     url = 'https://calculator4engineers.com/wp-json/wp/v2'
 
     post = {
         'title': posttitle,
+        'author': random.choice(['1', '2', '4', '5', '6']),
         'content': content,
         'status': 'publish',
+        'date': time,
         'publish': 'standard',
         'categories': '3'
     }

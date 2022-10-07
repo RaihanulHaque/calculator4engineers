@@ -95,7 +95,7 @@ class Post:
         return table
 
     def wp_paragraph_center(self, text):
-        return f"<!-- wp:paragraph {{\"align\":\"center\"}} --><p class = \"has-text-align-center\" >{text}</p> <!-- /wp: paragraph -->"
+        return f"<!-- wp:paragraph {{\"align\":\"center\"}} --><p class = \"has-text-align-center\" >{text}</p> <!-- /wp:paragraph -->"
 
     def image_add_tree(self):
         locString = f"<!-- wp:image {{\"id\":452,\"sizeSlug\":\"full\",\"linkDestination\":\"none\" }} -->"
@@ -124,15 +124,17 @@ class Post:
             return f"{self.n} is a prime number."
 
     def extraPrimeF(self, n):
-        extracode = ""
+        division_code = ""
+        multiply_code = ""
         holdarr = []
         holdarrstr1 = ""
         holdarrstr2 = ""
 
         for x in range(1, int(sqrt(n))+1):
             if n % x == 0:
-                extracode = extracode + \
-                    self.wp_paragraph(f"{self.n} ÷ {x} = {int(n/x)}")
+                division_code += self.wp_paragraph(
+                    f"{self.n} ÷ {x} = {int(n/x)}")
+                multiply_code += self.wp_paragraph(f"-{int(n/x)} x -{x} = {n}")
                 holdarr.append(x)
                 holdarr.append(int(n/x))
 
@@ -154,7 +156,7 @@ class Post:
         positive_non_prime_factors = nonPrimefact[:-2]
         negative_factors = holdarrstr2[:-2]
 
-        return positive_factors, positive_non_prime_factors, negative_factors
+        return positive_factors, positive_non_prime_factors, negative_factors, division_code, multiply_code
 
     def sub(self, text):
         return f"<sub>{text}</sub>"
@@ -237,7 +239,7 @@ class Post:
 
         post += self.wp_h2("Formula of Prime Factor")
         post += self.wp_paragraph("It is possible to write any composite number as the product of powers of prime numbers. When a number is written as the product of multiple prime numbers, the process is called prime factorization. Mathematical expression for prime factors:")
-        post += self.wp_paragraph(
+        post += self.wp_paragraph_center(
             "N = p<sub>f1</sub><sup>a1</sup> +&nbsp; p<sub>f2</sub><sup>a2</sup> +&nbsp; &nbsp; p<sub>f3</sub><sup>a3</sup> + ... ... +&nbsp; p<sub>fn</sub><sup>an</sup>")
 
         p = "N = Any integer number<br>"
@@ -286,7 +288,7 @@ class Post:
 
     def prepareExtra1(self):
         post = ""
-        positive_factors, positive_non_prime_factors, negative_factors = self.extraPrimeF(
+        positive_factors, positive_non_prime_factors, negative_factors, division_code, multiply_code = self.extraPrimeF(
             self.n)
 
         closestprime = ""
@@ -300,7 +302,18 @@ class Post:
         sec2 += self.wp_paragraph(
             f"The negative factors of {self.n} are {negative_factors}")
 
-        post += sec1 + sec2
+        sec3 = self.wp_h2(f"How to Determine All the Factors of {self.n}?")
+        sec3 += self.wp_paragraph(
+            f"To determine all the factors of {self.n}, we have to find every divisor that divides {self.n} exactly. After finding that, we should express this like this:")
+        sec3 += division_code
+        sec3 += self.wp_paragraph(
+            f"Here every divisor & quotient are the factors of {self.n}. <br> So, the positive factors of 10365 are: {positive_factors}.")
+        sec3 += self.wp_paragraph(f"We can also express this like:")
+        sec3 += multiply_code
+        sec3 += self.wp_paragraph(
+            f"So the negative factors are: {negative_factors}.<br>Remember, a negative factor must multiply with another negative factor only to get our given number.")
+
+        post += sec1 + sec2 + sec3
 
         return post
 

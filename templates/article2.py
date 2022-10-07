@@ -95,7 +95,7 @@ class Post:
         return table
 
     def wp_paragraph_center(self, text):
-        return f"<!-- wp:paragraph {{\"align\":\"center\"}} --><p class = \"has-text-align-center\" >{text}</p> <!-- /wp: paragraph -->"
+        return f"<!-- wp:paragraph {{\"align\":\"center\"}} --><p class = \"has-text-align-center\" >{text}</p> <!-- /wp:paragraph -->"
 
     def image_add_tree(self):
         locString = f"<!-- wp:image {{\"id\":452,\"sizeSlug\":\"full\",\"linkDestination\":\"none\" }} -->"
@@ -124,14 +124,17 @@ class Post:
             return f"{self.n} is a prime number."
 
     def extraPrimeF(self, n):
-        extracode = ""
+        division_code = ""
+        multiply_code = ""
         holdarr = []
         holdarrstr1 = ""
         holdarrstr2 = ""
+
         for x in range(1, int(sqrt(n))+1):
             if n % x == 0:
-                extracode = extracode + \
-                    self.wp_paragraph(f"{self.n} ÷ {x} = {int(n/x)}")
+                division_code += self.wp_paragraph(
+                    f"{self.n} ÷ {x} = {int(n/x)}")
+                multiply_code += self.wp_paragraph(f"-{int(n/x)} x -{x} = {n}")
                 holdarr.append(x)
                 holdarr.append(int(n/x))
 
@@ -153,7 +156,7 @@ class Post:
         positive_non_prime_factors = nonPrimefact[:-2]
         negative_factors = holdarrstr2[:-2]
 
-        return positive_factors, positive_non_prime_factors, negative_factors
+        return positive_factors, positive_non_prime_factors, negative_factors, division_code, multiply_code
 
     def sub(self, text):
         return f"<sub>{text}</sub>"
@@ -213,7 +216,7 @@ class Post:
 
         post += self.wp_h2("Prime Factor's Formula")
         post += self.wp_paragraph("A prime factor must be a prime number as well as a factor of the given number. Basically, prime factors can be found by decomposing our given number. It can be expressed as a product of prime numbers with orders. In general, we represent our given number as a product of prime numbers with their orders. These prime numbers are certainly the prime factors of the given number.")
-        post += self.wp_paragraph(
+        post += self.wp_paragraph_center(
             "N = p<sub>f1</sub><sup>a1</sup> +&nbsp; p<sub>f2</sub><sup>a2</sup> +&nbsp; &nbsp; p<sub>f3</sub><sup>a3</sup> + ... ... +&nbsp; p<sub>fn</sub><sup>an</sup>")
 
         p = "N = Any integer number<br>"
@@ -263,7 +266,7 @@ class Post:
 
     def prepareExtra1(self):
         post = ""
-        positive_factors, positive_non_prime_factors, negative_factors = self.extraPrimeF(
+        positive_factors, positive_non_prime_factors, negative_factors, division_code, multiply_code = self.extraPrimeF(
             self.n)
         primef, left, str_primef, multi_primef = self.primeFactors(self.n)
 
@@ -282,7 +285,18 @@ class Post:
         sec2 += self.wp_paragraph(
             f"A number has negative factors as well. We know factors basically express the given number as the product of their multiplication. In the case of {self.n}, if we multiply(-{primef[0]}) with (-{left[1]}), we’ll get {self.n}. So, it makes -{primef[0]} & -{left[1]} as the factors of {self.n}. Other negative factors of {self.n} are:<br>{negative_factors}")
 
-        post += sec1 + sec2
+        sec3 = self.wp_h2(f"Every Factors of {self.n}")
+        sec3 += self.wp_paragraph(
+            f"To determine all the factors of , we have to find every divisor that divides {self.n} exactly. After finding that, we should express this like this:")
+        sec3 += division_code
+        sec3 += self.wp_paragraph(
+            f"Here every divisor & quotient are the factors of {self.n}. <br> So, the positive factors of 10365 are: {positive_factors}.")
+        sec3 += self.wp_paragraph(f"We can also express this like:")
+        sec3 += multiply_code
+        sec3 += self.wp_paragraph(
+            f"So the negative factors are: {negative_factors}.<br>Remember, a negative factor must multiply with another negative factor only to get our given number.")
+
+        post += sec1 + sec2 + sec3
 
         return post
 
