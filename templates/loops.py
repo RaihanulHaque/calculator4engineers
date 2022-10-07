@@ -110,20 +110,20 @@ class FactorTreeMethod:
 ######################################INITIAL STEP#########################################################################
 
         initialStep.append(
-            f"Before we can begin to factor a given number, we need to write it down. {n} is the given number in this context. Get the first two factors of the number {n}. We'll begin with the smallest possible number, which is 2 (Note that we didn't pick 1, since every integer is divisible by both 1 and itself).<br>")
+            f"Before we can begin to factor a given number, we need to write it down. {n} is the given number in this context. Get the first two factors of the number {n}. We'll begin with the smallest possible number, which is 2 (Note that we didn't pick 1, since every integer is divisible by both 1 and itself).<br><br>")
         initialStep.append(
-            f"Let’s take {n} as our given number. Now, we’ll write the root first. Then we’ll draw two arrows to link the first to branches or factors with the root. We’ll start trying from 2 and continue until we find a number that divides {n} exactly.<br>")
+            f"Let’s take {n} as our given number. Now, we’ll write the root first. Then we’ll draw two arrows to link the first to branches or factors with the root. We’ll start trying from 2 and continue until we find a number that divides {n} exactly.<br><br>")
         initialStep.append(
-            f"{n} is the given number whose factors are to be found. We’ll try to find its smallest factor which isn’t 1 as 1 is the divisor of every number & it isn’t a prime number. So let's begin with number 2.<br>")
-        initialStep.append(f"Let's use the given number, {n}. We'll now start by writing the root. Then, we'll draw two arrows to connect the first to the root's branches or contributing elements. Starting with 2, we'll keep trying until we find a number that divides {n} perfectly. (Note that we didn't take 1 because every number can be divided by both 1 and the number itself).<br>")
-        initialStep.append(f"{n} is the targeted number whose factors are to be determined. We have to find the first two factors of {n}. We'll find if 2 is a factor of {n} because 2 is the smallest possible number we have in our hand(Note that we didn't pick 1, since 1 and the number itself are always the two factors of the given number).<br>")
+            f"{n} is the given number whose factors are to be found. We’ll try to find its smallest factor which isn’t 1 as 1 is the divisor of every number & it isn’t a prime number. So let's begin with number 2.<br><br>")
+        initialStep.append(f"Let's use the given number, {n}. We'll now start by writing the root. Then, we'll draw two arrows to connect the first to the root's branches or contributing elements. Starting with 2, we'll keep trying until we find a number that divides {n} perfectly. (Note that we didn't take 1 because every number can be divided by both 1 and the number itself).<br><br>")
+        initialStep.append(f"{n} is the targeted number whose factors are to be determined. We have to find the first two factors of {n}. We'll find if 2 is a factor of {n} because 2 is the smallest possible number we have in our hand(Note that we didn't pick 1, since 1 and the number itself are always the two factors of the given number).<br><br>")
         initialStep.append(
-            f"The target number, for which the factors should be determined, is {n}. We'll try to find such two numbers which we can multiply to get {n} . But we won't use 1 because if we use 1, we have to multiply it with {n} to obtain {n} and it won't decompose our given number. So, we'll check if 2 is a factor of {n} since it's the smallest integer we can use.<br>")
+            f"The target number, for which the factors should be determined, is {n}. We'll try to find such two numbers which we can multiply to get {n}. But we won't use 1 because if we use 1, we have to multiply it with {n} to obtain {n} and it won't decompose our given number. So, we'll check if 2 is a factor of {n} since it's the smallest integer we can use.<br><br>")
 
 ######################################INITIAL STEP DIVIDED BY 2#########################################################################
 
         initialStepBy2.append(
-            f"With no leftover, {n} is divided by 2 in this instance.Therefore, the first two factors of {n} will be {primef[0]} and {left[1]}.We would continue exploring until we discovered a prime number that exactly divided {n} if it wasn't divisible by 2. ")
+            f"With no leftover, {n} is divided by 2 in this instance.Therefore, the first two factors of {n} will be {primef[0]} and {left[1]}. We would continue exploring until we discovered a prime number that exactly divided {n} if it wasn't divisible by 2. ")
         initialStepBy2.append(
             f"There are no leftovers when you split {n} by 2. Thus, {primef[0]} and {left[1]} will be the first two elements of {n}. If it wasn't divisible by 2, we would keep looking until we found a prime number that exactly divided {n}. ")
         initialStepBy2.append(

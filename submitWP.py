@@ -13,7 +13,17 @@ def authenticate():
     return header
 
 
-def submit(posttitle, n, content, time):
+def featured_image_upload(image_list):
+    url = 'https://calculator4engineers.com/wp-json/wp/v2'
+    header = authenticate()
+    path = random.choice(image_list)
+    media = {'file': open(path, 'rb')}
+    image = requests.post(url+'/media', headers=header, files=media)
+    post_id = json.loads(image.content.decode('utf-8'))['id']
+    return str(post_id)
+
+
+def submit(posttitle, n, content, time, bannerImages):
     header = authenticate()
     url = 'https://calculator4engineers.com/wp-json/wp/v2'
 
@@ -25,7 +35,8 @@ def submit(posttitle, n, content, time):
         'status': 'publish',
         'date': time,
         'publish': 'standard',
-        'categories': '4'
+        'categories': '4',
+        'featured_media': featured_image_upload(bannerImages)
     }
     wprequest = requests.post(url + '/posts', headers=header, json=post)
     return wprequest

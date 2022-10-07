@@ -42,6 +42,15 @@ class Post:
         left.append(1)
         return primef, left, str_primef[:-2], multi_primef[:-2]
 
+    def unique_primef(self, n):
+        unique_arr = [*set(self.primef)]
+        str_unique = ""
+        for x in range(0, len(unique_arr) - 1):
+            str_unique += f"{unique_arr[x]}, "
+        str_unique = f"{str_unique[:-2]} and {unique_arr[len(unique_arr)-1]}"
+
+        return str_unique
+
     def exponential(self, array):
         frequency = {}
         str = ""
@@ -118,8 +127,8 @@ class Post:
             return f"No. The square root of 10365 isn’t an integer. So it isn’t a square number."
 
     def isPrime_or_Composite(self, n):
-        primef, left, str_primef, multi_primef = self.primeFactors(n)
-        if len(primef) > 1:
+        # primef, left, str_primef, multi_primef = self.primeFactors(n)
+        if len(self.primef) > 1:
             return f"{self.n} is a composite number."
         else:
             return f"{self.n} is a prime number."
@@ -174,13 +183,13 @@ class Post:
 
     def prepareIntro(self):
         p1 = self.wp_paragraph(
-            f"{self.str_primef} are the prime factors of {self.n}. ")
+            f"{self.unique_primef(self.n)} are the prime factors of {self.n}. ")
         p2 = self.wp_paragraph(
-            f"{self.str_primef} are prime numbers and if we multiply them, we’ll get {self.n}. So, {self.str_primef} are the factors of {self.n}.")
+            f"{self.str_primef} are prime numbers and if we multiply them, we’ll get {self.n}. So, {self.unique_primef(self.n)} are the factors of {self.n}.")
         intro = p1 + p2
         intro += self.wp_table(
             f"""<tr>
-                    <td>Prime Factors</td><td>{self.str_primef}</td>
+                    <td>Prime Factors</td><td>{self.unique_primef(self.n)}</td>
                 </tr>
                 <tr>
                     <td>Product of Prime Factor</td><td>{self.multi_primef}</td>
@@ -295,10 +304,10 @@ class Post:
         positive_factors, positive_non_prime_factors, negative_factors, division_code, multiply_code = self.extraPrimeF(
             self.n)
 
-        closestprime = self.wp_h2(f"Closest Prime Number of {self.n}")
-        closestprime += self.wp_paragraph(
-            f"{self.nearestPrime(self.n)} is the prime number which is closest around {self.n}.")
-        post += closestprime
+        # closestprime = self.wp_h2(f"Closest Prime Number of {self.n}")
+        # closestprime += self.wp_paragraph(
+        #     f"{self.nearestPrime(self.n)} is the prime number which is closest around {self.n}.")
+        # post += closestprime
 
         sec1 = self.wp_h2(f"Non-Prime Factors of {self.n}")
         sec1 += self.wp_paragraph(
@@ -338,7 +347,7 @@ class Post:
         <!-- /wp:list -->"""
 
         sec2 = self.wp_h2(f"Use of Factors")
-        sec2 += self.wp_paragraph(f"We can arrange things in a variety of ways thanks to factors. It is helpful for creating equitable divisions. It has a variety of numerical mathematics applications. Additionally, it is advantageous when comparing things, exchanging money, telling the time, etc. To make solving quadratic equations simpler, they can also be factored.")
+        sec2 += self.wp_paragraph(f"Factors allow us to put things in various configurations. It's useful for making fair divisions. It has several applications in mathematics involving numbers. The ability to do so is also helpful when making comparisons, exchanging money, telling time, etc. Quadratic equations can also be factored to make solving them easier.")
 
         post = sec1 + sec2
 

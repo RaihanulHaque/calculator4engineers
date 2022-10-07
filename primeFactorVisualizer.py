@@ -220,8 +220,12 @@ def createDivisionStructure(n):
 
 def generateEndText(n, items):
     answers = [str(items[key]) for key in items]
-    answers = ', '.join(answers)
-    endText = f"We got the prime factors of {n} as {answers}"
+    answers = set(answers)
+    x = []
+    for a in answers:
+        x.append(a)
+    xStr = ', '.join(x)
+    endText = f"We got the prime factors of {n} as {xStr}"
     return endText
 
 
@@ -298,7 +302,7 @@ def generateImages(n: int):
 fileNames = []
 
 if __name__ == "__main__":
-    n = 97
+    n = 48
     time1 = time.perf_counter()
     # createTreeStructure(n)
     # createDivisionStructure(n)

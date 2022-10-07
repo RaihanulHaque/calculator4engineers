@@ -28,6 +28,7 @@ for i in range(0, len(numbers)):
     n = numbers[i]
     treeImages = generateImages(n)['TreeFiles']
     divisionImages = generateImages(n)['DivisionFiles']
+    bannerImages = generateImages(n)['Banners']
     p1 = article1.Post(n)
     p2 = article2.Post(n)
     p3 = article3.Post(n)
@@ -54,9 +55,9 @@ for i in range(0, len(numbers)):
     # content = intro + theory + howtocalculatelist + factorTree + factorTreeSteps
     content = f"{intro}{theory}{formula}{howtocalculatelist}{factorTree}{factorTreeSteps}{division}{divisionSteps}{extra1}{extra2}{faq}"
 
-    tdelta = timedelta(minutes=random.randrange(3, 7))
+    tdelta = timedelta(minutes=random.randrange(10, 20))
     current_time = current_time + tdelta
     time = schedule(current_time)
 
-    WPrequest = submitWP.submit(title, n, content, time)
+    WPrequest = submitWP.submit(title, n, content, time, bannerImages)
     print(f"Number - {i+1} is scheduled at {time} with {WPrequest}")

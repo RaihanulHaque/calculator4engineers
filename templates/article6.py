@@ -42,6 +42,15 @@ class Post:
         left.append(1)
         return primef, left, str_primef[:-2], multi_primef[:-2]
 
+    def unique_primef(self, n):
+        unique_arr = [*set(self.primef)]
+        str_unique = ""
+        for x in range(0, len(unique_arr) - 1):
+            str_unique += f"{unique_arr[x]}, "
+        str_unique = f"{str_unique[:-2]} and {unique_arr[len(unique_arr)-1]}"
+
+        return str_unique
+
     def exponential(self, array):
         frequency = {}
         str = ""
@@ -118,8 +127,8 @@ class Post:
             return f"No. The square root of 10365 isn’t an integer. So it isn’t a square number."
 
     def isPrime_or_Composite(self, n):
-        primef, left, str_primef, multi_primef = self.primeFactors(n)
-        if len(primef) > 1:
+        # primef, left, str_primef, multi_primef = self.primeFactors(n)
+        if len(self.primef) > 1:
             return f"{self.n} is a composite number."
         else:
             return f"{self.n} is a prime number."
@@ -174,14 +183,14 @@ class Post:
 
     def prepareIntro(self):
         p1 = self.wp_paragraph(
-            f"The prime factors of {self.n} are {self.str_primef}. ")
+            f"The prime factors of {self.n} are {self.unique_primef(self.n)}. ")
         p2 = self.wp_paragraph(
-            f"{self.str_primef} are prime numbers, and multiplying them yields {self.n}. Thus, the prime factors of {self.n} are {self.str_primef}.")
+            f"{self.str_primef} are prime numbers, and multiplying them yields {self.n}. Thus, the prime factors of {self.n} are {self.unique_primef(self.n)}.")
         intro = p1 + p2
 
         intro += self.wp_table(
             f"""<tr>
-                    <td>Prime Factors</td><td>{self.str_primef}</td>
+                    <td>Prime Factors</td><td>{self.unique_primef(self.n)}</td>
                 </tr>
                 <tr>
                     <td>Product of Prime Factor</td><td>{self.multi_primef}</td>
@@ -294,8 +303,8 @@ class Post:
         positive_factors, positive_non_prime_factors, negative_factors, division_code, multiply_code = self.extraPrimeF(
             self.n)
 
-        closestprime = ""
-        post += closestprime
+        # closestprime = ""
+        # post += closestprime
 
         sec1 = self.wp_h2(f"Non-Prime Factors of {self.n}")
         sec1 += self.wp_paragraph(
