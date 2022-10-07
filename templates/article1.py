@@ -16,6 +16,7 @@ class Post:
         self.factorTree = self.prepareFactorTree()
         self.division = self.prepareDivision()
         self.extra1 = self.prepareExtra1()
+        self.extra2 = self.prepareExtra2()
         self.FAQ = self.prepareFAQ()
 
     def primeFactors(self, n):
@@ -317,6 +318,27 @@ class Post:
 
         return post
 
+    def prepareExtra2(self):
+        post = ""
+
+        sec1 = self.wp_h2(f"Facts of Factorization")
+        sec1 += f"""<!-- wp:list {{\"ordered\":true}}-->
+        <ol>
+            <li>No fractional parts of numbers can be used as factors.</li>
+            <li> The number you enter must be a whole number.</li>
+            <li>Factors can be both negative & positive.</li>
+            <li>Each and every natural number has 1 as a factor.</li>
+            <li>An equation with quadratic terms can also be factored.</li>
+        </ol>
+        <!-- /wp:list -->"""
+
+        sec2 = self.wp_h2(f"Use of Factors")
+        sec2 += self.wp_paragraph(f"Factors allow us to put things in various configurations. It's useful for making fair divisions. It has several applications in mathematics involving numbers. The ability to do so is also helpful when making comparisons, exchanging money, telling time, etc. Quadratic equations can also be factored to make solving them easier.")
+
+        post = sec1 + sec2
+
+        return post
+
     def prepareFAQ(self):
         post = ""
         post += self.wp_h2("Frequently Asked Questions")
@@ -361,6 +383,8 @@ if __name__ == "__main__":
     postHtml += post.theory
     postHtml += post.howtocalculatelist
     postHtml += post.factorTree
+    postHtml += post.extra1
+    postHtml += post.extra2
     # postHtml += "</html>"
 
     with open("view.html", "w") as htmlFile:

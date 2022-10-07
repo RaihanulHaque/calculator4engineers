@@ -16,6 +16,7 @@ class Post:
         self.factorTree = self.prepareFactorTree()
         self.division = self.prepareDivision()
         self.extra1 = self.prepareExtra1()
+        self.extra2 = self.prepareExtra2()
         self.FAQ = self.prepareFAQ()
 
     def primeFactors(self, n):
@@ -320,6 +321,34 @@ class Post:
             f"So the negative factors are: {negative_factors}.<br>Remember, a negative factor must multiply with another negative factor only to get our given number.")
 
         post += sec1 + sec2 + sec3
+
+        return post
+
+    def prepareExtra2(self):
+        post = ""
+        positive_factors, positive_non_prime_factors, negative_factors, division_code, multiply_code = self.extraPrimeF(
+            self.n)
+
+        sec1 = self.wp_h2(f"Facts of Factorization")
+        sec1 += f"""<!-- wp:list {{\"ordered\":true}}-->
+        <ol>
+            <li>Factors can’t be a fragment of a number.</li>
+            <li>Given number must be an integer.</li>
+            <li>Factors can be both negative & positive.</li>
+            <li>1 is the factor of every natural number.</li>
+            <li>A quadratic equation can also have factors.</li>
+            <li>If we divide a given number, then the divisors & the quotient of the given number are also factors of it. Example:</li>
+        </ol>
+        <!-- /wp:list -->"""
+
+        sec1 = self.wp_paragraph_center(division_code)
+        sec1 += self.wp_paragraph(
+            f"Here, {positive_factors} are the factors of {self.n}. ")
+
+        sec2 = self.wp_h2(f"Facts About Factorization")
+        sec2 += self.wp_paragraph(f"We can arrange things in a variety of ways thanks to factors. It is helpful for creating equitable divisions. In mathematics involving number theories, it has a variety of uses. Additionally, it is advantageous when comparing things, exchanging money, telling the time, etc. It is also possible to factor quadratic equations to simplify their solution.")
+
+        post = sec1 + sec2
 
         return post
 

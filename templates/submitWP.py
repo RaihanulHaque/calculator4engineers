@@ -19,10 +19,13 @@ def submit(posttitle, content):
 
     post = {
         'title': posttitle,
+        # 'slug': f"prime-factorization-of-{n}",
+        # 'author': random.choice(['1', '2', '4', '5', '6']),
         'content': content,
         'status': 'publish',
+        # 'date': time,
         'publish': 'standard',
-        'categories': '3'
+        'categories': '4'
     }
     wprequest = requests.post(url + '/posts', headers=header, json=post)
     return wprequest

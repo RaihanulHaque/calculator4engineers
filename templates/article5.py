@@ -16,6 +16,7 @@ class Post:
         self.factorTree = self.prepareFactorTree()
         self.division = self.prepareDivision()
         self.extra1 = self.prepareExtra1()
+        self.extra2 = self.prepareExtra2()
         self.FAQ = self.prepareFAQ()
 
     def primeFactors(self, n):
@@ -297,6 +298,27 @@ class Post:
             f"So the negative factors are: {negative_factors}.<br>Remember, a negative factor must multiply with another negative factor only to get our given number.")
 
         post += sec1 + sec2 + sec3
+
+        return post
+
+    def prepareExtra2(self):
+        post = ""
+
+        sec1 = self.wp_h2(f"Facts of Factorization")
+        sec1 += f"""<!-- wp:list {{\"ordered\":true}}-->
+        <ol>
+            <li>No fractional parts of numbers can be used as factors.</li>
+            <li>It is required that you input a whole number.</li>
+            <li>Factors can be both negative & positive.</li>
+            <li>Each and every natural number has 1 as a factor.</li>
+            <li>An equation with quadratic terms can also be factored.</li>
+        </ol>
+        <!-- /wp:list -->"""
+
+        sec2 = self.wp_h2(f"Use of Factors")
+        sec2 += self.wp_paragraph(f"We can arrange things in a variety of ways thanks to factors. It is helpful for creating equitable divisions. It has a variety of numerical mathematics applications. Additionally, it is advantageous when comparing things, exchanging money, telling the time, etc. To make solving quadratic equations simpler, they can also be factored.")
+
+        post = sec1 + sec2
 
         return post
 

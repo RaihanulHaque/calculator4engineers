@@ -419,7 +419,7 @@ for i in range(0, len(numbers)):
             f"So the negative factors are: {holdarrstr2[:-2]}.")
     #############################################################################################
     content = content + wp_h2("Facts of Factorization")
-    content = content + f"<!-- wp: list --><ul><li>No fractional parts of numbers can be used as factors.</li><li> The number you enter must be a whole number.</li><li>Factors can be both negative & positive.</li><li>Each and every natural number has 1 as a factor.</li><li>It is also possible to factor a quadratic equation.</li></ul> <!-- / wp: list -->"
+    content = content + f"<!-- wp:list --><ul><li>No fractional parts of numbers can be used as factors.</li><li> The number you enter must be a whole number.</li><li>Factors can be both negative & positive.</li><li>Each and every natural number has 1 as a factor.</li><li>It is also possible to factor a quadratic equation.</li></ul> <!-- / wp:list -->"
 
     content = content + wp_h2("Use of Factors")
     content = content + wp_paragraph("Factors allow us to put things in various configurations. It's useful for making fair divisions. It has several applications in mathematics involving numbers. The ability to do so is also helpful when making comparisons, exchanging money, telling time, etc. Quadratic equations can also be factored to make solving them easier.")

@@ -48,10 +48,11 @@ for i in range(0, len(numbers)):
     divisionSteps = loops.DivisionMethod(
         n, numbers, i, divisionImages).divisionSteps()
     extra1 = random.choice(posts).extra1
+    extra2 = random.choice(posts).extra2
     faq = random.choice(posts).FAQ
 
     # content = intro + theory + howtocalculatelist + factorTree + factorTreeSteps
-    content = f"{intro}{theory}{formula}{howtocalculatelist}{factorTree}{factorTreeSteps}{division}{divisionSteps}{extra1}{faq}"
+    content = f"{intro}{theory}{formula}{howtocalculatelist}{factorTree}{factorTreeSteps}{division}{divisionSteps}{extra1}{extra2}{faq}"
 
     tdelta = timedelta(minutes=random.randrange(3, 7))
     current_time = current_time + tdelta

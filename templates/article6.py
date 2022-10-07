@@ -1,6 +1,6 @@
 import random
 from math import floor, sqrt
-import submitWP
+# import submitWP
 
 
 class Post:
@@ -16,6 +16,7 @@ class Post:
         self.factorTree = self.prepareFactorTree()
         self.division = self.prepareDivision()
         self.extra1 = self.prepareExtra1()
+        self.extra2 = self.prepareExtra2()
         self.FAQ = self.prepareFAQ()
 
     def primeFactors(self, n):
@@ -319,6 +320,27 @@ class Post:
 
         return post
 
+    def prepareExtra2(self):
+        post = ""
+
+        sec1 = self.wp_h2(f"Factorization Facts")
+        sec1 += f"""<!-- wp:list {{\"ordered\":true}}-->
+        <ol>
+            <li>Numerical fractions cannot be used as factors.</li>
+            <li> The number you enter must be a whole number.</li>
+            <li>Both negative and positive factors are possible.</li>
+            <li>There is a factor of 1 in every single natural integer.</li>
+            <li>It is also possible to factor a quadratic equation.</li>
+        </ol>
+        <!-- /wp:list -->"""
+
+        sec2 = self.wp_h2(f"Use of Factors")
+        sec2 += self.wp_paragraph(f"Factors allow us to put things in various configurations. It's useful for making fair divisions. It has several applications in mathematics involving numbers. The ability to do so is also helpful when making comparisons, exchanging money, telling time, etc. Quadratic equations can also be factored to make solving them easier.")
+
+        post = sec1 + sec2
+
+        return post
+
     def prepareFAQ(self):
         post = ""
         post += self.wp_h2("Frequently Asked Questions")
@@ -363,8 +385,11 @@ if __name__ == "__main__":
     postHtml += post.theory
     postHtml += post.howtocalculatelist
     postHtml += post.factorTree
+    postHtml += post.extra1
+    postHtml += post.extra2
+    postHtml += post.FAQ
     # postHtml += "</html>"
 
     with open("view.html", "w") as htmlFile:
         htmlFile.write(postHtml)
-    print(submitWP.submit(post.title, content=postHtml))
+    # print(submitWP.submit(post.title, content=postHtml))

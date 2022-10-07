@@ -16,6 +16,7 @@ class Post:
         self.factorTree = self.prepareFactorTree()
         self.division = self.prepareDivision()
         self.extra1 = self.prepareExtra1()
+        self.extra2 = self.prepareExtra2()
         self.FAQ = self.prepareFAQ()
 
     def primeFactors(self, n):
@@ -298,6 +299,34 @@ class Post:
             f"So the negative factors are: {negative_factors}.<br>Keep in mind that we can obtain our given number only by multiplying a negative factor with another negative factor.")
 
         post += sec1 + sec2 + sec3
+
+        return post
+
+    def prepareExtra2(self):
+        post = ""
+        positive_factors, positive_non_prime_factors, negative_factors, division_code, multiply_code = self.extraPrimeF(
+            self.n)
+
+        sec1 = self.wp_h2(f"Some Important Facts of Factorization")
+        sec1 += f"""<!-- wp:list {{\"ordered\":true}}-->
+        <ol>
+            <li>Fractions can't be used as factors.</li>
+            <li>The given number must be an integer.</li>
+            <li>Factors can be both negative & positive.</li>
+            <li>Every single natural number has 1 as a component.</li>
+            <li>An equation with quadratic terms can also be factored.</li>
+            <li>If we divide a given number, then the divisors & the quotient of the given number are also factors of it. Example:</li>
+        </ol>
+        <!-- /wp:list -->"""
+
+        sec1 = self.wp_paragraph_center(division_code)
+        sec1 += self.wp_paragraph(
+            f"Here, both the divisors and the quotiens {positive_factors} are the factors of {self.n}. ")
+
+        sec2 = self.wp_h2(f"Use of Factorization in Real Life")
+        sec2 += self.wp_paragraph(f"We are able to arrange things in numerous ways for a variety of reasons. It assists in creating just divisions. It has several uses in mathematics that is based on number theory. It is also helpful for price comparison, money exchange, telling the time, and other tasks. Quadratic equations can also be factored in order to make their solutions simpler.")
+
+        post = sec1 + sec2
 
         return post
 
