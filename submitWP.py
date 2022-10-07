@@ -13,18 +13,19 @@ def authenticate():
     return header
 
 
-def submit(posttitle, content, time):
+def submit(posttitle, n, content, time):
     header = authenticate()
     url = 'https://calculator4engineers.com/wp-json/wp/v2'
 
     post = {
         'title': posttitle,
+        'slug': f"prime-factorization-of-{n}",
         'author': random.choice(['1', '2', '4', '5', '6']),
         'content': content,
         'status': 'publish',
         'date': time,
         'publish': 'standard',
-        'categories': '3'
+        'categories': '4'
     }
     wprequest = requests.post(url + '/posts', headers=header, json=post)
     return wprequest

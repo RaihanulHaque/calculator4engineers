@@ -5,6 +5,21 @@ from primeFactorVisualizer import generateImages
 from datetime import timedelta, datetime
 
 
+def schedule(current_time):
+    # tdelta = timedelta(minutes=random.randrange(3, 9))
+    # current_time = current_time + tdelta
+    hour = str(current_time.hour)
+    minute = str(current_time.minute)
+    second = str(current_time.second)
+    if len(hour) == 1:
+        hour = f"0{hour}"
+    if len(minute) == 1:
+        minute = f"0{minute}"
+    if len(second) == 1:
+        second = f"0{second}"
+    return f"{current_time.date()}T{hour}:{minute}:{second}"
+
+
 # n = 10365
 current_time = datetime.now()
 numbers = [320, 10365, 46, 54, 69, 104, 326]
@@ -42,6 +57,5 @@ for i in range(0, len(numbers)):
     current_time = current_time + tdelta
     time = schedule(current_time)
 
-    WPrequest = submitWP.submit(title, content, time)
-    print(f"Number - {i+1} is scheduled at {time} with {WPrequest.text}")
-    # print(factorTreeSteps.factorTreeSteps())
+    WPrequest = submitWP.submit(title, n, content, time)
+    print(f"Number - {i+1} is scheduled at {time} with {WPrequest}")

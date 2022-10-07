@@ -9,10 +9,10 @@ import json
 class FactorTreeMethod:
     def __init__(self, n, numbers, index, treeImages):
         self.n = n
-        self.treeImages = treeImages
-        self.content = self.factorTreeSteps()
         self.numbers = numbers
         self.index = index
+        self.treeImages = treeImages
+        self.content = self.factorTreeSteps()
 
     def authenticate(self):
         user = "Rahi"
@@ -213,10 +213,10 @@ class FactorTreeMethod:
 class DivisionMethod:
     def __init__(self, n, numbers, index, divisionImages):
         self.n = n
-        self.divisionImages = divisionImages
-        self.content = self.divisionSteps()
         self.numbers = numbers
         self.index = index
+        self.divisionImages = divisionImages
+        self.content = self.divisionSteps()
 
     def authenticate(self):
         user = "Rahi"
@@ -263,7 +263,7 @@ class DivisionMethod:
         return code
 
     def link_previous(self, numbers, index):
-        code = wp_paragraph(
+        code = self.wp_paragraph(
             "<strong> Check the first step of these prime factorization examples to better understand how this step is done:</strong>")
         if index == 0:
             pass
@@ -276,7 +276,7 @@ class DivisionMethod:
         return code
 
     def link_next(self, numbers, index):
-        code = wp_paragraph(
+        code = self.wp_paragraph(
             "<strong>Check the first step of these prime factorization examples to better understand how this step is done:</strong>")
         if len(numbers)-1 == index:
             pass
