@@ -324,37 +324,37 @@ class Post:
         return content
 
     def prepareFAQ(self):
-    post = ""
-    post += self.wp_h2("Frequently Asked Questions")
+        post = ""
+        post += self.wp_h2("Frequently Asked Questions")
 
-    post += self.wp_h3("1. Can Factors Be Negative?")
-    post += self.wp_paragraph("Yes. Factors can be negative too. Like the factors of 10 are 1, 2, 5, 10, -1, -2, -5, -10. Because if we multiply -10 with -1, we’ll get 10. So, -10 & -1 are the factors of 10. But most of the time we use positive factors only.")
+        post += self.wp_h3("1. Can Factors Be Negative?")
+        post += self.wp_paragraph("Yes. Factors can be negative too. Like the factors of 10 are 1, 2, 5, 10, -1, -2, -5, -10. Because if we multiply -10 with -1, we’ll get 10. So, -10 & -1 are the factors of 10. But most of the time we use positive factors only.")
 
-    post += self.wp_h3(f"2. Is {self.n} a Square Number?")
-    post += self.wp_paragraph(self.check_squared(self.n))
+        post += self.wp_h3(f"2. Is {self.n} a Square Number?")
+        post += self.wp_paragraph(self.check_squared(self.n))
 
-    post += self.wp_h3(f"3. What Is the Square of {self.n}?")
-    post += self.wp_paragraph(f"Square of {self.n} is {self.n*self.n}.")
+        post += self.wp_h3(f"3. What Is the Square of {self.n}?")
+        post += self.wp_paragraph(f"Square of {self.n} is {self.n*self.n}.")
 
-    post += self.wp_h3(f"4. What Is the Root of {self.n}?")
-    post += self.wp_paragraph(f"Root of {self.n} is {sqrt(self.n)}")
+        post += self.wp_h3(f"4. What Is the Root of {self.n}?")
+        post += self.wp_paragraph(f"Root of {self.n} is {sqrt(self.n)}")
 
-    post += self.wp_h3(
-        f"5. Is {self.n} a Composite Number or a Prime Number?")
-    post += self.wp_paragraph(self.isPrime_or_Composite(self.n))
+        post += self.wp_h3(
+            f"5. Is {self.n} a Composite Number or a Prime Number?")
+        post += self.wp_paragraph(self.isPrime_or_Composite(self.n))
 
-    post += self.wp_h3(f"6. How Many Factors Does a Prime Number Have?")
-    post += self.wp_paragraph(
-        "A Prime number has only 2 factors. They are 1 & the number itself.")
+        post += self.wp_h3(f"6. How Many Factors Does a Prime Number Have?")
+        post += self.wp_paragraph(
+            "A Prime number has only 2 factors. They are 1 & the number itself.")
 
-    post += self.wp_h3("7. What is a Composite Number?")
-    post += self.wp_paragraph(
-        "If a positive integer number has more than two factors, it can be called a composite number.")
+        post += self.wp_h3("7. What is a Composite Number?")
+        post += self.wp_paragraph(
+            "If a positive integer number has more than two factors, it can be called a composite number.")
 
-    post += self.wp_h3("8. What are the factors of a prime number?")
-    post += self.wp_paragraph("They are 1 & the number itself.")
+        post += self.wp_h3("8. What are the factors of a prime number?")
+        post += self.wp_paragraph("They are 1 & the number itself.")
 
-    return post
+        return post
 
 
 if __name__ == "__main__":
@@ -365,9 +365,13 @@ if __name__ == "__main__":
     # postHtml += submitWP.title
     postHtml += post.intro
     postHtml += post.theory
+    postHtml += post.formula
     postHtml += post.howtocalculatelist
     postHtml += post.factorTree
-    # postHtml += "</html>"
+    postHtml += post.division
+    postHtml += post.extra1
+    postHtml += post.extra2
+    postHtml += post.FAQ
 
     with open("view.html", "w") as htmlFile:
         htmlFile.write(postHtml)

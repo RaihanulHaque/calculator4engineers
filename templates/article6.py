@@ -16,6 +16,7 @@ class Post:
         self.factorTree = self.prepareFactorTree()
         self.division = self.prepareDivision()
         self.extra1 = self.prepareExtra1()
+        self.extra2 = self.prepareExtra2()
         self.FAQ = self.prepareFAQ()
 
     def primeFactors(self, n):
@@ -94,8 +95,11 @@ class Post:
         <!-- /wp:table -->"""
         return table
 
+    def wp_list(self, text):
+        return f"<!-- wp:list --> {text} <!-- /wp:list -->"
+
     def wp_paragraph_center(self, text):
-        return f"<!-- wp:paragraph {{\"align\":\"center\"}} --><p class = \"has-text-align-center\" >{text}</p> <!-- /wp: paragraph -->"
+        return f"<!-- wp:paragraph {{\"align\":\"center\"}} --><p class = \"has-text-align-center\" >{text}</p> <!-- /wp:paragraph -->"
 
     def image_add_tree(self):
         locString = f"<!-- wp:image {{\"id\":452,\"sizeSlug\":\"full\",\"linkDestination\":\"none\" }} -->"
@@ -305,6 +309,22 @@ class Post:
 
         return post
 
+    def prepareExtra2(self):
+
+        content = self.wp_h2("Facts of Factorization")
+        list = "<ol>"
+        list += "<li>No fractional parts of numbers can be used as factors.</li>"
+        list += "<li>The number you enter must be a whole number.</li>"
+        list += "<li>Factors can be both negative & positive</li>"
+        list += "<li>Each and every natural number has 1 as a factor.</li>"
+        list += "<li>It is also possible to factor a quadratic equation.</li>"
+        list += "</ol>"
+        list = self.wp_list(list)
+        content += list
+        content += self.wp_h2("Use of Factors")
+        content += self.wp_paragraph("Factors allow us to put things in various configurations. It's useful for making fair divisions. It has several applications in mathematics involving numbers. The ability to do so is also helpful when making comparisons, exchanging money, telling time, etc. Quadratic equations can also be factored to make solving them easier.")
+        return content
+
     def prepareFAQ(self):
         post = ""
         post += self.wp_h2("Frequently Asked Questions")
@@ -347,10 +367,13 @@ if __name__ == "__main__":
     # postHtml += submitWP.title
     postHtml += post.intro
     postHtml += post.theory
+    postHtml += post.formula
     postHtml += post.howtocalculatelist
     postHtml += post.factorTree
-    # postHtml += "</html>"
+    postHtml += post.division
+    postHtml += post.extra1
+    postHtml += post.extra2
+    postHtml += post.FAQ
 
     with open("view.html", "w") as htmlFile:
         htmlFile.write(postHtml)
-    print(submitWP.submit(post.title, content=postHtml))

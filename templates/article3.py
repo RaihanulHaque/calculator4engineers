@@ -16,6 +16,7 @@ class Post:
         self.factorTree = self.prepareFactorTree()
         self.division = self.prepareDivision()
         self.extra1 = self.prepareExtra1()
+        self.extra2 = self.prepareExtra2()
         self.FAQ = self.prepareFAQ()
 
     def primeFactors(self, n):
@@ -94,8 +95,11 @@ class Post:
         <!-- /wp:table -->"""
         return table
 
+    def wp_list(self, text):
+        return f"<!-- wp:list --> {text} <!-- /wp:list -->"
+
     def wp_paragraph_center(self, text):
-        return f"<!-- wp:paragraph {{\"align\":\"center\"}} --><p class = \"has-text-align-center\" >{text}</p> <!-- /wp: paragraph -->"
+        return f"<!-- wp:paragraph {{\"align\":\"center\"}} --><p class = \"has-text-align-center\" >{text}</p> <!-- /wp:paragraph -->"
 
     def image_add_tree(self):
         locString = f"<!-- wp:image {{\"id\":452,\"sizeSlug\":\"full\",\"linkDestination\":\"none\" }} -->"
@@ -308,6 +312,28 @@ class Post:
 
         return post
 
+    def prepareExtra2(self):
+
+        content = self.wp_h2("Facts About Factorization")
+        list = "<ol>"
+        list += "<li>Factors can’t be a fragment of a number.</li>"
+        list += "<li>Given number must be an integer.</li>"
+        list += "<li>Factors can be both negative & positive.</li>"
+        list += "<li>1 is the factor of every natural number.</li>"
+        list += "<li>A quadratic equation can also have factors.</li>"
+        list += "<li>If we divide a given number, then the divisors & the quotient of the given number are also factors of it. Example:</li>"
+        list += "</ol>"
+        list = self.wp_list(list)
+        content += list
+        cp = self.wp_paragraph_center(
+            "10365 ÷ 1 = 10365<br>10365 ÷ 3 = 3455<br>10365 ÷ 5 = 2073<br>10365 ÷ 15 = 691")
+        content += cp
+        content += self.wp_paragraph(
+            "Here, both the divisors 1, 3, 5, 15 and the quotients 10365, 3455, 2073, 691 are the factors of 10365.")
+        content += self.wp_h2("Application of Factorization in Daily Life")
+        content += self.wp_paragraph("We use factors to arrange something in different ways. It helps us to divide something equally. In mathematics, it is used in various number related problems. Besides, it is used in comparing something, money exchange, understanding time etc. We can also factorize quadratic equations to simplify it.")
+        return content
+
     def prepareFAQ(self):
         post = ""
         post += self.wp_h2("Frequently Asked Questions")
@@ -347,10 +373,13 @@ if __name__ == "__main__":
     # postHtml += submitWP.title
     postHtml += post.intro
     postHtml += post.theory
+    postHtml += post.formula
     postHtml += post.howtocalculatelist
     postHtml += post.factorTree
-    # postHtml += "</html>"
+    postHtml += post.division
+    postHtml += post.extra1
+    postHtml += post.extra2
+    postHtml += post.FAQ
 
     with open("view.html", "w") as htmlFile:
         htmlFile.write(postHtml)
-    print(submitWP.submit(post.title, content=postHtml))
