@@ -15,6 +15,7 @@ class Post:
         self.howtocalculatelist = self.howtoCalculateList()
         self.factorTree = self.prepareFactorTree()
         self.division = self.prepareDivision()
+        self.extra1 = self.prepareExtra1()
         self.FAQ = self.prepareFAQ()
 
     def primeFactors(self, n):
@@ -111,16 +112,48 @@ class Post:
     def check_squared(self, n):
         root = sqrt(n)
         if int(root + 0.5) ** 2 == n:
-            return f"Yes. The square root of {n} is an integer. So it is a square number."
+            return f"Yes. The square root of {self.n} is an integer. So it is a square number."
         else:
             return f"No. The square root of 10365 isn’t an integer. So it isn’t a square number."
 
     def isPrime_or_Composite(self, n):
         primef, left, str_primef, multi_primef = self.primeFactors(n)
         if len(primef) > 1:
-            return f"{n} is a composite number."
+            return f"{self.n} is a composite number."
         else:
-            return f"{n} is a prime number."
+            return f"{self.n} is a prime number."
+
+    def extraPrimeF(self, n):
+        extracode = ""
+        holdarr = []
+        holdarrstr1 = ""
+        holdarrstr2 = ""
+        for x in range(1, int(sqrt(n))+1):
+            if n % x == 0:
+                extracode = extracode + \
+                    self.wp_paragraph(f"{self.n} ÷ {x} = {int(n/x)}")
+                holdarr.append(x)
+                holdarr.append(int(n/x))
+
+        holdarr.sort()
+
+        for y in range(0, len(holdarr)):
+            holdarrstr1 = holdarrstr1 + f"{holdarr[y]}, "
+            holdarrstr2 = holdarrstr2 + f"-{holdarr[y]}, "
+        nonPrimefact = ""
+
+        for x in range(0, len(self.primef)):
+            if self.primef[x] in holdarr:
+                holdarr.remove(self.primef[x])
+
+        for x in range(0, len(holdarr)):
+            nonPrimefact = nonPrimefact + f"{holdarr[x]}, "
+
+        positive_factors = holdarrstr1[:-2]
+        positive_non_prime_factors = nonPrimefact[:-2]
+        negative_factors = holdarrstr2[:-2]
+
+        return positive_factors, positive_non_prime_factors, negative_factors
 
     def sub(self, text):
         return f"<sub>{text}</sub>"
@@ -229,6 +262,28 @@ class Post:
             "That's why it's referred to as a \"division method.\" Here's how it works, step by step:")
 
         post += p1 + image + p2
+        return post
+
+    def prepareExtra1(self):
+        post = ""
+        positive_factors, positive_non_prime_factors, negative_factors = self.extraPrimeF(
+            self.n)
+
+        closestprime = self.wp_h2(f"Closest Prime Number of {self.n}")
+        closestprime += self.wp_paragraph(
+            f"{self.nearestPrime(self.n)} is the prime number which is closest around {self.n}.")
+        post += closestprime
+
+        sec1 = self.wp_h2(f"Non-Prime Factors of {self.n}")
+        sec1 += self.wp_paragraph(
+            f"{self.n} has also some more factors other than the prime factors. Those numbers are factors of {self.n} but not prime numbers. Those are called non-prime factors. The non-prime factors of {self.n} are {positive_non_prime_factors}.")
+
+        sec2 = self.wp_h2(f"Negative Factors of {self.n}")
+        sec2 += self.wp_paragraph(
+            f"A negative number can also be a factor. {self.n} also has some negative factors. The negative factors of {self.n} are {negative_factors}.")
+
+        post += sec1 + sec2
+
         return post
 
     def prepareFAQ(self):

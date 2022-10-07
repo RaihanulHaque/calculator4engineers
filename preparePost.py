@@ -24,11 +24,12 @@ factorTree = random.choice(posts).factorTree
 factorTreeSteps = loops.FactorTreeMethod(n, treeImages).factorTreeSteps()
 division = random.choice(posts).division
 divisionSteps = loops.DivisionMethod(n, divisionImages).divisionSteps()
+extra1 = random.choice(posts).extra1
 faq = random.choice(posts).FAQ
 
 
 # content = intro + theory + howtocalculatelist + factorTree + factorTreeSteps
-content = f"{intro}{theory}{formula}{howtocalculatelist}{factorTree}{factorTreeSteps}{division}{divisionSteps}{faq}"
+content = f"{intro}{theory}{formula}{howtocalculatelist}{factorTree}{factorTreeSteps}{division}{divisionSteps}{extra1}{faq}"
 
 print(submitWP.submit(title, content))
 # print(factorTreeSteps.factorTreeSteps())
