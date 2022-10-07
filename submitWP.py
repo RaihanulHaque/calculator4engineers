@@ -19,7 +19,7 @@ def submit(posttitle, n, content, time):
 
     post = {
         'title': posttitle,
-        'slug': f"prime-factorization-of-{n}",
+        'slug': f"{n}",
         'author': random.choice(['1', '2', '4', '5', '6']),
         'content': content,
         'status': 'publish',

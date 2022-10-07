@@ -64,11 +64,11 @@ class FactorTreeMethod:
         if index == 0:
             pass
         elif index == 1:
-            code += f"<!-- wp:list --><ul><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index-1]}/\">Prime factorization of {numbers[index-1]}</a></li></ul><!-- /wp:list -->"
+            code += f"<!-- wp:list --><ul><li><a href=\"https://calculator4engineers.com/prime-factorization/{numbers[index-1]}/\">Prime factorization of {numbers[index-1]}</a></li></ul><!-- /wp:list -->"
         elif index == 2:
-            code += f"<!-- wp:list --><ul><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index-1]}/\">Prime factorization of {numbers[index-1]}</a></li><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index-2]}/\">Prime factorization of {numbers[index-2]}</a></li></ul><!-- /wp:list -->"
+            code += f"<!-- wp:list --><ul><li><a href=\"https://calculator4engineers.com/prime-factorization/{numbers[index-1]}/\">Prime factorization of {numbers[index-1]}</a></li><li><a href=\"https://calculator4engineers.com/prime-factorization/{numbers[index-2]}/\">Prime factorization of {numbers[index-2]}</a></li></ul><!-- /wp:list -->"
         else:
-            code += f"<!-- wp:list --><ul><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index-1]}/\">Prime factorization of {numbers[index-1]}</a></li><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index-2]}/\">Prime factorization of {numbers[index-2]}</a></li><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index-3]}/\">Prime factorization of {numbers[index-3]}</a></li></ul><!-- /wp:list -->"
+            code += f"<!-- wp:list --><ul><li><a href=\"https://calculator4engineers.com/prime-factorization/{numbers[index-1]}/\">Prime factorization of {numbers[index-1]}</a></li><li><a href=\"https://calculator4engineers.com/prime-factorization/{numbers[index-2]}/\">Prime factorization of {numbers[index-2]}</a></li><li><a href=\"https://calculator4engineers.com/prime-factorization/{numbers[index-3]}/\">Prime factorization of {numbers[index-3]}</a></li></ul><!-- /wp:list -->"
         return code
 
     def link_next(self, numbers, index):
@@ -77,11 +77,11 @@ class FactorTreeMethod:
         if len(numbers)-1 == index:
             pass
         elif index == len(numbers)-2:
-            code += f"<!-- wp:list --><ul><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index+1]}/\">Prime factorization of {numbers[index+1]}</a></li></ul><!-- /wp:list -->"
+            code += f"<!-- wp:list --><ul><li><a href=\"https://calculator4engineers.com/prime-factorization/{numbers[index+1]}/\">Prime factorization of {numbers[index+1]}</a></li></ul><!-- /wp:list -->"
         elif index == len(numbers)-3:
-            code += f"<!-- wp:list --><ul><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index+1]}/\">Prime factorization of {numbers[index+1]}</a></li><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index+2]}/\">Prime factorization of {numbers[index+2]}</a></li></ul><!-- /wp:list -->"
+            code += f"<!-- wp:list --><ul><li><a href=\"https://calculator4engineers.com/prime-factorization/{numbers[index+1]}/\">Prime factorization of {numbers[index+1]}</a></li><li><a href=\"https://calculator4engineers.com/prime-factorization/{numbers[index+2]}/\">Prime factorization of {numbers[index+2]}</a></li></ul><!-- /wp:list -->"
         else:
-            code += f"<!-- wp:list --><ul><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index+1]}/\">Prime factorization of {numbers[index+1]}</a></li><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index+2]}/\">Prime factorization of {numbers[index+2]}</a></li><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index+3]}/\">Prime factorization of {numbers[index+3]}</a></li></ul><!-- /wp:list -->"
+            code += f"<!-- wp:list --><ul><li><a href=\"https://calculator4engineers.com/prime-factorization/{numbers[index+1]}/\">Prime factorization of {numbers[index+1]}</a></li><li><a href=\"https://calculator4engineers.com/prime-factorization/{numbers[index+2]}/\">Prime factorization of {numbers[index+2]}</a></li><li><a href=\"https://calculator4engineers.com/prime-factorization/{numbers[index+3]}/\">Prime factorization of {numbers[index+3]}</a></li></ul><!-- /wp:list -->"
 
         return code
 
@@ -157,12 +157,12 @@ class FactorTreeMethod:
 
 ######################################END#########################################################################
         end = [
-            f"From the diagram we get {str_primef} as the prime factors of {n} as those factors can’t be factorized further. <br>We can express like this: {n} = {multi_primef}<br><strong>Note: we need to factorize them until all the factors become prime numbers.</strong>",
-            f"Now express them as the conventional form: {n} = {multi_primef}<br><strong>Note : We didn’t use 1 because it is neither a prime number nor divisible further.</strong>",
-            f"From the diagram we get {str_primef} as the prime factors of {n}. < br > We can express like this: {n} = {multi_primef}<br><strong>Note: we need to factorize them until all the factors become prime numbers.</strong>",
-            f"We can express like this: {n} = {multi_primef}<br><strong>Note: we need to factorize them until all the factors become prime numbers.</strong>",
-            f"From the diagram we get {str_primef} as the prime factors of {n} as those factors can’t be factorized further.<br> We can express like this: {n} = {multi_primef}<br><strong>Note: we need to factorize them until all the factors become prime numbers.</strong>",
-            f"Now, we have to look at those numbers which are the top of the branches because those are our prime factors. So, {str_primef} are our prime factors obtained from the factor tree.<br>We can express like this: {n} = {multi_primef}<br><strong>Note: we need to factorize them until all the factors become prime numbers.</strong>"
+            f"From the diagram we get {str_primef} as the prime factors of {n} as those factors can’t be factorized further. <br>We can express like this: {n} = {multi_primef}<br><br><strong>Note: we need to factorize them until all the factors become prime numbers.</strong>",
+            f"Now express them as the conventional form: {n} = {multi_primef}<br><br><strong>Note : We didn’t use 1 because it is neither a prime number nor divisible further.</strong>",
+            f"From the diagram we get {str_primef} as the prime factors of {n}. <br> We can express like this: {n} = {multi_primef}<br><br><strong>Note: we need to factorize them until all the factors become prime numbers.</strong>",
+            f"We can express like this: {n} = {multi_primef}<br><br><strong>Note: we need to factorize them until all the factors become prime numbers.</strong>",
+            f"From the diagram we get {str_primef} as the prime factors of {n} as those factors can’t be factorized further.<br> We can express like this: {n} = {multi_primef}<br><br><strong>Note: we need to factorize them until all the factors become prime numbers.</strong>",
+            f"Now, we have to look at those numbers which are the top of the branches because those are our prime factors. So, {str_primef} are our prime factors obtained from the factor tree.<br>We can express like this: {n} = {multi_primef}<br><br><strong>Note: we need to factorize them until all the factors become prime numbers.</strong>"
         ]
 
         h4_step = "Step 1"
@@ -268,11 +268,11 @@ class DivisionMethod:
         if index == 0:
             pass
         elif index == 1:
-            code += f"<!-- wp:list --><ul><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index-1]}/\">Prime factorization of {numbers[index-1]}</a></li></ul><!-- /wp:list -->"
+            code += f"<!-- wp:list --><ul><li><a href=\"https://calculator4engineers.com/prime-factorization/{numbers[index-1]}/\">Prime factorization of {numbers[index-1]}</a></li></ul><!-- /wp:list -->"
         elif index == 2:
-            code += f"<!-- wp:list --><ul><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index-1]}/\">Prime factorization of {numbers[index-1]}</a></li><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index-2]}/\">Prime factorization of {numbers[index-2]}</a></li></ul><!-- /wp:list -->"
+            code += f"<!-- wp:list --><ul><li><a href=\"https://calculator4engineers.com/prime-factorization/{numbers[index-1]}/\">Prime factorization of {numbers[index-1]}</a></li><li><a href=\"https://calculator4engineers.com/prime-factorization/{numbers[index-2]}/\">Prime factorization of {numbers[index-2]}</a></li></ul><!-- /wp:list -->"
         else:
-            code += f"<!-- wp:list --><ul><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index-1]}/\">Prime factorization of {numbers[index-1]}</a></li><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index-2]}/\">Prime factorization of {numbers[index-2]}</a></li><li><a href=\"https://calculator4engineers.com/prime-factorization/prime-factorization-of-{numbers[index-3]}/\">Prime factorization of {numbers[index-3]}</a></li></ul><!-- /wp:list -->"
+            code += f"<!-- wp:list --><ul><li><a href=\"https://calculator4engineers.com/prime-factorization/{numbers[index-1]}/\">Prime factorization of {numbers[index-1]}</a></li><li><a href=\"https://calculator4engineers.com/prime-factorization/{numbers[index-2]}/\">Prime factorization of {numbers[index-2]}</a></li><li><a href=\"https://calculator4engineers.com/prime-factorization/{numbers[index-3]}/\">Prime factorization of {numbers[index-3]}</a></li></ul><!-- /wp:list -->"
         return code
 
     def link_next(self, numbers, index):

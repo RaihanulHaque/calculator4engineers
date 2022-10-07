@@ -178,6 +178,28 @@ class Post:
         p2 = self.wp_paragraph(
             f"If you multiply the prime numbers {self.str_primef}, you will obtain {self.n}. The prime factors of {self.n} are therefore {self.str_primef}.")
         intro = p1 + p2
+        intro += self.wp_table(
+            f"""<tr>
+                    <td>Prime Factors</td><td>{self.str_primef}</td>
+                </tr>
+                <tr>
+                    <td>Product of Prime Factor</td><td>{self.multi_primef}</td>
+                </tr>
+                <tr>
+                    <td>Exponential Form</td><td>{self.exponential(self.primef)}</td>
+                </tr>
+                <tr>
+                    <td>Total Number of Factors</td><td>{len(self.primef)}</td>
+                </tr>
+                <tr>
+                    <td>Largest Prime Factor</td><td>{max(self.primef)}</td>
+                </tr>
+                <tr>
+                    <td>Smallest Prime Factor</td><td>{min(self.primef)}</td>
+                </tr>
+                <tr>
+                    <td>Closest Prime Numbers</td><td>{self.nearestPrime(self.n)}</td>
+                </tr>""")
         return intro
 
     def prepareTheory(self):
@@ -218,7 +240,7 @@ class Post:
         post += self.wp_h2("Formula of Prime Factor")
         post += self.wp_paragraph("A prime factor must be both a factor of the supplied number and a prime number. Basically, by decomposing the provided number, prime factors can be found. Generally, we show our supplied number as the result of prime numbers combined with their respective orders. These prime numbers are definitely the given number's prime factors. Mathematical expression for prime factors:")
         post += self.wp_paragraph_center(
-            "N = p<sub>f1</sub><sup>a1</sup> +&nbsp; p<sub>f2</sub><sup>a2</sup> +&nbsp; &nbsp; p<sub>f3</sub><sup>a3</sup> + ... ... +&nbsp; p<sub>fn</sub><sup>an</sup>")
+            "N = p<sub>f1</sub><sup>a1</sup> +&nbsp; p<sub>f2</sub><sup>a2</sup> +&nbsp; &nbsp; p<sub>f3</sub><sup>a3</sup> + ...... +&nbsp; p<sub>fn</sub><sup>an</sup>")
 
         p = "N = Any integer number<br>"
         p += "p<sub>f1</sub>, p<sub>f2</sub>, p<sub>f3</sub>, p<sub>fn</sub> = Prime factors<br>"
@@ -292,11 +314,11 @@ class Post:
             f"To find all the factors of {self.n}, we must find every number that exactly divides it. Once we've found that, we should put it this way:")
         sec3 += division_code
         sec3 += self.wp_paragraph(
-            f"Each divisor and quotient in this calculation are factors of {self.n}. <br> So, the positive factors of 10365 are: {positive_factors}.")
+            f"Each divisor and quotient in this calculation are factors of {self.n}. <br><br>So, the positive factors of 10365 are: {positive_factors}.")
         sec3 += self.wp_paragraph(f"We can also express this like:")
         sec3 += multiply_code
         sec3 += self.wp_paragraph(
-            f"So the negative factors are: {negative_factors}.<br>Keep in mind that we can obtain our given number only by multiplying a negative factor with another negative factor.")
+            f"So the negative factors are: {negative_factors}.<br><br>Keep in mind that we can obtain our given number only by multiplying a negative factor with another negative factor.")
 
         post += sec1 + sec2 + sec3
 
@@ -308,7 +330,7 @@ class Post:
             self.n)
 
         sec1 = self.wp_h2(f"Some Important Facts of Factorization")
-        sec1 += f"""<!-- wp:list {{\"ordered\":true}}-->
+        sec1 += f"""<!-- wp:list {{\"ordered\":true}} -->
         <ol>
             <li>Fractions can't be used as factors.</li>
             <li>The given number must be an integer.</li>
@@ -319,7 +341,7 @@ class Post:
         </ol>
         <!-- /wp:list -->"""
 
-        sec1 = self.wp_paragraph_center(division_code)
+        sec1 += self.wp_paragraph_center(division_code)
         sec1 += self.wp_paragraph(
             f"Here, both the divisors and the quotiens {positive_factors} are the factors of {self.n}. ")
 

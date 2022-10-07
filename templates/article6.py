@@ -169,7 +169,7 @@ class Post:
         return f"<strong>{text}</strong>"
 
     def prepareTitle(self):
-        title = f"Prime Factorization of {self.n}: 2 Different Methods"
+        title = f"Prime Factorization of {self.n}: [2 Different Methods]"
         return title
 
     def prepareIntro(self):
@@ -242,7 +242,7 @@ class Post:
         post += self.wp_h2("Formula of Prime Factor")
         post += self.wp_paragraph("To be considered a prime factor, a number must not only be a factor of the given number but also be a prime number. In essence, prime factors can be identified by decomposing the given number. So, our given number can also be expressed as the product of prime numbers with adequate power. Prime factors are expressed mathematically as:")
         post += self.wp_paragraph_center(
-            "N = p<sub>f1</sub><sup>a1</sup> +&nbsp; p<sub>f2</sub><sup>a2</sup> +&nbsp; &nbsp; p<sub>f3</sub><sup>a3</sup> + ... ... +&nbsp; p<sub>fn</sub><sup>an</sup>")
+            "N = p<sub>f1</sub><sup>a1</sup> +&nbsp; p<sub>f2</sub><sup>a2</sup> +&nbsp; &nbsp; p<sub>f3</sub><sup>a3</sup> + ...... +&nbsp; p<sub>fn</sub><sup>an</sup>")
 
         p = "N = Any integer number<br>"
         p += "p<sub>f1</sub>, p<sub>f2</sub>, p<sub>f3</sub>, p<sub>fn</sub> = Prime factors<br>"
@@ -310,11 +310,11 @@ class Post:
             f"To determine all the factors of {self.n}, we have to find every divisor that divides {self.n} exactly. After finding that, we should express this like this:")
         sec3 += division_code
         sec3 += self.wp_paragraph(
-            f"Here every divisor & quotient are the factors of {self.n}. <br> So, the positive factors of 10365 are: {positive_factors}.")
+            f"Here every divisor & quotient are the factors of {self.n}. <br><br>So, the positive factors of 10365 are: {positive_factors}.")
         sec3 += self.wp_paragraph(f"We can also express this like:")
         sec3 += multiply_code
         sec3 += self.wp_paragraph(
-            f"So the negative factors are: {negative_factors}.<br>Keep in mind that we can obtain our given number only by multiplying a negative factor with another negative factor.")
+            f"So the negative factors are: {negative_factors}.<br><br>Keep in mind that we can obtain our given number only by multiplying a negative factor with another negative factor.")
 
         post += sec1 + sec2 + sec3
 
@@ -324,7 +324,7 @@ class Post:
         post = ""
 
         sec1 = self.wp_h2(f"Factorization Facts")
-        sec1 += f"""<!-- wp:list {{\"ordered\":true}}-->
+        sec1 += f"""<!-- wp:list {{\"ordered\":true}} -->
         <ol>
             <li>Numerical fractions cannot be used as factors.</li>
             <li> The number you enter must be a whole number.</li>

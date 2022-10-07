@@ -178,6 +178,28 @@ class Post:
         p2 = self.wp_paragraph(
             f"{self.str_primef} are prime numbers and if we multiply them, we’ll get {self.n}. So, {self.str_primef} are the factors of {self.n}.")
         intro = p1 + p2
+        intro += self.wp_table(
+            f"""<tr>
+                    <td>Prime Factors</td><td>{self.str_primef}</td>
+                </tr>
+                <tr>
+                    <td>Product of Prime Factor</td><td>{self.multi_primef}</td>
+                </tr>
+                <tr>
+                    <td>Exponential Form</td><td>{self.exponential(self.primef)}</td>
+                </tr>
+                <tr>
+                    <td>Total Number of Factors</td><td>{len(self.primef)}</td>
+                </tr>
+                <tr>
+                    <td>Largest Prime Factor</td><td>{max(self.primef)}</td>
+                </tr>
+                <tr>
+                    <td>Smallest Prime Factor</td><td>{min(self.primef)}</td>
+                </tr>
+                <tr>
+                    <td>Closest Prime Numbers</td><td>{self.nearestPrime(self.n)}</td>
+                </tr>""")
         return intro
 
     def prepareTheory(self):
@@ -186,7 +208,7 @@ class Post:
         h = self.wp_h2("Definition of Prime Factors")
         post += h
 
-        p = self.wp_paragraph("If a given number is evenly divisible by a set of numbers, then that set of numbers can be called as the factors of the given numbers. And the prime numbers among that set are known as prime factors . Contrarily, the multipliers of a product also can be depicted as the factors of that product. And if the multipliers are prime, they are prime factors.")
+        p = self.wp_paragraph("If a given number is evenly divisible by a set of numbers, then that set of numbers can be called as the factors of the given numbers. And the prime numbers among that set are known as prime factors. Contrarily, the multipliers of a product also can be depicted as the factors of that product. And if the multipliers are prime, they are prime factors.")
         post += p
 
         c = self.wp_paragraph_center("105 = 3 x 5 x 7")
@@ -218,7 +240,7 @@ class Post:
         post += self.wp_h2("Formula of Prime Factorization")
         post += self.wp_paragraph("Any composite number can be expressed as the product of prime numbers with certain power. When a number is written as the product of multiple prime numbers, the process is called prime factorization. Mathematical expression for prime factors:")
         post += self.wp_paragraph_center(
-            "N = p<sub>f1</sub><sup>a1</sup> +&nbsp; p<sub>f2</sub><sup>a2</sup> +&nbsp; &nbsp; p<sub>f3</sub><sup>a3</sup> + ... ... +&nbsp; p<sub>fn</sub><sup>an</sup>")
+            "N = p<sub>f1</sub><sup>a1</sup> +&nbsp; p<sub>f2</sub><sup>a2</sup> +&nbsp; &nbsp; p<sub>f3</sub><sup>a3</sup> + ...... +&nbsp; p<sub>fn</sub><sup>an</sup>")
 
         p = "N = Any integer number<br>"
         p += "p<sub>f1</sub>, p<sub>f2</sub>, p<sub>f3</sub>, p<sub>fn</sub> = Prime factors<br>"
@@ -291,11 +313,11 @@ class Post:
             f"To determine all the factors of {self.n}, we have to find every divisor that divides {self.n} exactly. After finding that, we should express this like this:")
         sec3 += division_code
         sec3 += self.wp_paragraph(
-            f"Here every divisor & quotient are the factors of {self.n}. <br> So, the positive factors of 10365 are: {positive_factors}.")
+            f"Here every divisor & quotient are the factors of {self.n}. <br><br>So, the positive factors of 10365 are: {positive_factors}.")
         sec3 += self.wp_paragraph(f"We can also express this like:")
         sec3 += multiply_code
         sec3 += self.wp_paragraph(
-            f"So the negative factors are: {negative_factors}.<br>Remember, a negative factor must multiply with another negative factor only to get our given number.")
+            f"So the negative factors are: {negative_factors}.<br><br>Remember, a negative factor must multiply with another negative factor only to get our given number.")
 
         post += sec1 + sec2 + sec3
 
@@ -305,7 +327,7 @@ class Post:
         post = ""
 
         sec1 = self.wp_h2(f"Facts of Factorization")
-        sec1 += f"""<!-- wp:list {{\"ordered\":true}}-->
+        sec1 += f"""<!-- wp:list {{\"ordered\":true}} -->
         <ol>
             <li>No fractional parts of numbers can be used as factors.</li>
             <li>It is required that you input a whole number.</li>
