@@ -96,7 +96,7 @@ class Post:
         return table
 
     def wp_list(self, text):
-        return f"<!-- wp:list --> {text} <!-- /wp:list -->"
+        return f"<!-- wp:list {{\"ordered\":true}} --> {text} <!-- /wp:list -->"
 
     def wp_paragraph_center(self, text):
         return f"<!-- wp:paragraph {{\"align\":\"center\"}} --><p class = \"has-text-align-center\" >{text}</p> <!-- /wp:paragraph -->"
@@ -367,7 +367,7 @@ class Post:
 
 if __name__ == "__main__":
 
-    post = Post(48)
+    post = Post(1003)
     postHtml = ""
     # postHtml = "<html>"
     # postHtml += submitWP.title
@@ -383,3 +383,4 @@ if __name__ == "__main__":
 
     with open("view.html", "w") as htmlFile:
         htmlFile.write(postHtml)
+    print(submitWP.submit(post.title, content=postHtml))
