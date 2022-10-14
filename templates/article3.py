@@ -47,8 +47,10 @@ class Post:
         str_unique = ""
         for x in range(0, len(unique_arr) - 1):
             str_unique += f"{unique_arr[x]}, "
-        str_unique = f"{str_unique[:-2]} and {unique_arr[len(unique_arr)-1]}"
-
+        if len(unique_arr) == 1:
+            str_unique = f"{str_unique[:-2]}"
+        else:
+            str_unique = f"{str_unique[:-2]} and {unique_arr[len(unique_arr)-1]}"
         return str_unique
 
     def exponential(self, array):
