@@ -21,6 +21,18 @@ def primeFactors(n):
     return primef, left, str_primef[:-2], multi_primef[:-2]
 
 
+def primeFactors2(n):
+    factors = {}
+    c = 2
+    while (n > 1):
+
+        if (n % c == 0):
+            factors[int(n)] = c
+            n = n / c
+        else:
+            c = c + 1
+    return factors
+
 def isPrimeorComposite(n):
     primef, left, str_primef = primeFactors(n)
     if len(primef) > 1:
@@ -29,7 +41,9 @@ def isPrimeorComposite(n):
         return f"{n} is a prime number."
 
 
-n = 103650
+# n = 103650
+arr = [32768, 33592, 604]
+n = arr[0]
 primef, left, str_primef, multi_primef = primeFactors(n)
 # for i in range(0, len(primef)):
 #     print(f"{left[i]}\n")
@@ -38,6 +52,8 @@ primef, left, str_primef, multi_primef = primeFactors(n)
 # print(len(primef))
 # print(isPrimeorComposite(n))
 print(primef)
-print(left)
-print(str_primef)
-print(multi_primef)
+print(primef)
+print(primeFactors2(n))
+# print(left)
+# print(str_primef)
+# print(multi_primef)

@@ -20,9 +20,10 @@ def schedule(current_time):
     return f"{current_time.date()}T{hour}:{minute}:{second}"
 
 
-# n = 10365
+# n = 10361
 current_time = datetime.now()
-numbers = [320, 10365, 46, 54, 69, 104, 326]
+# numbers = [601, 604, 613, 10365, 631, 632, 633, 634]
+numbers = [2642,1962,3700]
 
 for i in range(0, len(numbers)):
     n = numbers[i]
@@ -55,7 +56,7 @@ for i in range(0, len(numbers)):
     # content = intro + theory + howtocalculatelist + factorTree + factorTreeSteps
     content = f"{intro}{theory}{formula}{howtocalculatelist}{factorTree}{factorTreeSteps}{division}{divisionSteps}{extra1}{extra2}{faq}"
 
-    tdelta = timedelta(minutes=random.randrange(10, 20))
+    tdelta = timedelta(minutes=random.randrange(1, 3))
     current_time = current_time + tdelta
     time = schedule(current_time)
 

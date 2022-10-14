@@ -319,7 +319,7 @@ class Post:
 
         sec3 = self.wp_h2(f"Every Factors of {self.n}")
         sec3 += self.wp_paragraph(
-            f"To determine all the factors of , we have to find every divisor that divides {self.n} exactly. After finding that, we should express this like this:")
+            f"To determine all the factors of {self.n}, we have to find every divisor that divides {self.n} exactly. After finding that, we should express this like this:")
         sec3 += division_code
         sec3 += self.wp_paragraph(
             f"Here every divisor & quotient are the factors of {self.n}. <br> So, the positive factors of 10365 are: {positive_factors}.")

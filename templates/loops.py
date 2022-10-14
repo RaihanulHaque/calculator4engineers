@@ -5,14 +5,13 @@ import requests
 import base64
 import json
 
-
 class FactorTreeMethod:
     def __init__(self, n, numbers, index, treeImages):
         self.n = n
         self.numbers = numbers
         self.index = index
         self.treeImages = treeImages
-        self.content = self.factorTreeSteps()
+        # self.content = self.factorTreeSteps()
 
     def authenticate(self):
         user = "Rahi"
@@ -56,6 +55,7 @@ class FactorTreeMethod:
         locString += f"<figure class=\"wp-block-image size-full\"><img src=\"{image_link}\" alt=\"\" class=\"wp-image-{str(post_id)}\"/></figure>"
         locString += "<!-- /wp:image -->"
         code = locString
+        # print(f"{image_link}\n")
         return code
 
     def link_previous(self, numbers, index):
@@ -123,7 +123,7 @@ class FactorTreeMethod:
 ######################################INITIAL STEP DIVIDED BY 2#########################################################################
 
         initialStepBy2.append(
-            f"With no leftover, {n} is divided by 2 in this instance.Therefore, the first two factors of {n} will be {primef[0]} and {left[1]}. We would continue exploring until we discovered a prime number that exactly divided {n} if it wasn't divisible by 2. ")
+            f"With no leftover, {n} is divided by 2 in this instance. Therefore, the first two factors of {n} will be {primef[0]} and {left[1]}. We would continue exploring until we discovered a prime number that exactly divided {n} if it wasn't divisible by 2. ")
         initialStepBy2.append(
             f"There are no leftovers when you split {n} by 2. Thus, {primef[0]} and {left[1]} will be the first two elements of {n}. If it wasn't divisible by 2, we would keep looking until we found a prime number that exactly divided {n}. ")
         initialStepBy2.append(
@@ -150,7 +150,7 @@ class FactorTreeMethod:
             f"Since {primef[len(primef)-2]} and {left[len(primef)-1]} are both prime numbers, they cannot be factored any further. With that, our factor tree is finished.",
             f"{primef[len(primef)-2]} & {left[len(primef)-1]} are prime numbers. So, the process ends here & we got our prime factors. Else, we had to continue the process until every branch of the tree ultimately ended as a prime number. {str_primef} are the prime factors we’re looking for (As they’re at the top of the branches of our diagram & no branches are coming out of them).",
             f"Both {primef[len(primef)-2]} and {left[len(primef)-1]} are prime numbers, so we won’t get anything else rather than 1 & the number itself by factoring them again. So, our factor tree is completed.",
-            f"{primef[len(primef)-2]} & {left[len(primef)-1]} are the two factors of {left[len(primef)-2]}, both of which are prime numbers. This concludes the procedure, and we now have our prime factors. If not , we were to keep going until each branch of the tree resulted in a prime number.",
+            f"{primef[len(primef)-2]} & {left[len(primef)-1]} are the two factors of {left[len(primef)-2]}, both of which are prime numbers. This concludes the procedure, and we now have our prime factors. If not, we were to keep going until each branch of the tree resulted in a prime number.",
             f"Since {primef[len(primef)-2]} and {left[len(primef)-1]} are both prime numbers, it cannot be factored any further. With that, our factor tree is finished.",
             f"It cannot be factored further because {primef[len(primef)-2]} & {left[len(primef)-1]} are both prime numbers. Our factor tree is complete at this point."
         ]
@@ -184,13 +184,22 @@ class FactorTreeMethod:
                 content += self.wp_h4(h4_step)
                 content += self.image_upload(treeImages[j])
 
+                # loopInsideRandomString = [
+                #     f"Given that {primef[j-1]} is prime whereas {left[j]} is not, we can factorize {left[j]} in the same way we did before. The two components of {left[j]} are hence {primef[j]} and {left[j+1]}.",
+                #     f"As {primef[j-1]} is also a prime number, and so, we only need to find the next two factors of {left[j]}. The two factors of {left[j]} are {primef[j]} & {left[j+1]}.",
+                #     f"As {primef[j-1]} is a prime number but {left[j]} isn’t, we’ll factorize {left[j]} like the previous one. We’ll get {primef[j]} and {left[j+1]} as the two factors of {left[j]}.",
+                #     f""
+                #     f"As {primef[j-1]} is a prime number, it is also our first prime factor. Whereas {left[j]} is not, so we’ve to factorize {left[j]} in the same way we did it for {left[j-1]}. The two components of {left[j]} are hence {primef[j]} and {left[j+1]}.",
+                #     f"{primef[j-1]} is a prime number but {left[j]} is not. Thus we must factorize {left[j]} similarly to how we did for {left[j-1]}. Thus, {primef[j]} & {left[j+1]} are the two factors of {left[j]}."
+                # ]
                 loopInsideRandomString = [
-                    f"Given that {primef[j-1]} is prime whereas {left[j]} is not , we can factorize {left[j]} in the same way we did before. The two components of {left[j]} are hence {primef[j]} and {left[j+1]}.",
-                    f"As {primef[j-1]} is also a prime number, and so, we only need to find the next two factors of {left[j]}. The two factors of {left[j]} are {primef[j]} & {left[j+1]}.",
-                    f"As {primef[j-1]} is a prime number but {left[j]} isn’t, we’ll factorize {left[j]} like the previous one. We’ll get {primef[j]} and {left[j+1]} as the two factors of {left[j]}.",
-                    f"Since {primef[j-1]} is also a prime number, only the next two factors of {left[j]} need to be determined. The two factors of {left[j]} are {primef[j]} & {left[j+1]}.",
-                    f"As {primef[j-1]} is a prime number, it is also our first prime factor. Whereas {left[j]} is not , so we’ve to factorize {left[j]} in the same way we did it for {left[j-1]}. The two components of {left[j]} are hence {primef[j]} and {left[j+1]}.",
-                    f"{primef[j-1]} is a prime number but {left[j]} is not. Thus we must factorize it similarly to how we did for {left[j-1]}. Thus, {primef[j]} & {left[j+1]} are the two factors of {left[j]}."
+                    f"{primef[j-1]} is a prime factor but {left[j]} is not. So factorize {left[j]}, which gives {primef[j]} and {left[j+1]}.",
+                    f"As {primef[j-1]} is again a prime factor so focus on the non-prime factor number {left[j]} as I mentioned earlier. Factorizing it gives {primef[j]} and {left[j+1]}.",
+                    f"Factorizing the non-prime factor gives {primef[j]} and {left[j+1]}",
+                    f"Repeating the process, we get {primef[j]} and {left[j+1]} as the factors of {left[j]} (the non-prime number).",
+                    f"Next, we get {primef[j]} and {left[j+1]} by factorizing {left[j]} (very easy process, ain't it?).",
+                    f"As {primef[j-1]} is a prime number, ignore it and factorize the non-prime number {left[j]}, which yields {primef[j]} and {left[j+1]}.",
+                    f"Continuing the process, we now get {primef[j]} and {left[j+1]} by factorizing the non-prime number {left[j]}."
                 ]
                 content += self.wp_paragraph(
                     random.choice(loopInsideRandomString))
@@ -216,7 +225,7 @@ class DivisionMethod:
         self.numbers = numbers
         self.index = index
         self.divisionImages = divisionImages
-        self.content = self.divisionSteps()
+        # self.content = self.divisionSteps()
 
     def authenticate(self):
         user = "Rahi"
@@ -259,7 +268,9 @@ class DivisionMethod:
         locString = f"<!-- wp:image {{\"id\":{str(post_id)},\"sizeSlug\":\"full\",\"linkDestination\":\"none\" }} -->"
         locString += f"<figure class=\"wp-block-image size-full\"><img src=\"{image_link}\" alt=\"\" class=\"wp-image-{str(post_id)}\"/></figure>"
         locString += "<!-- /wp:image -->"
+        # print(f"{image_link}\n")
         code = locString
+        
         return code
 
     def link_previous(self, numbers, index):
@@ -419,13 +430,24 @@ class DivisionMethod:
                 content += self.wp_h4(h4_step)
                 content += self.image_upload(divisionImages[j])
 
+                # loopInsideRandomString = [
+                #     f"Now we’ll repeat the exact process for the quotient also. We can divide it by {primef[j]} and {left[j+1]} will be the quotient this time.",
+                #     f"We have to divide the quotient this time by the smallest prime number. {primef[j]} is the smallest prime number we’re looking for to divide the quotient exactly and it offers {left[j+1]} as the quotient this time.",
+                #     f"We'll now carry out the exact same procedure for the {left[j]}. We can divide {left[j]} by {primef[j]} and {left[j+1]} will be the quotient this time.",
+                #     f"Now, divide the quotient by the smallest prime number that it can be divided by. The smallest prime number we need to divide the quotient exactly is {primef[j]}, and it this time provides {left[j+1]} as the quotient.",
+                #     f"We’ll repeat the same process for {left[j]} now. We can divide it by {primef[j]} and we’ll get {left[j+1]} as a quotient.",
+                #     f"Now we’ll divide {left[j]} by {primef[j]} as it is the smallest prime number to divide it exactly. {left[j+1]} is the quotient."
+                # ]
                 loopInsideRandomString = [
-                    f"Now we’ll repeat the exact process for the quotient also. We can divide it by {primef[j]} and {left[j+1]} will be the quotient this time.",
-                    f"We have to divide the quotient this time by the smallest prime number. {primef[j]} is the smallest prime number we’re looking for to divide the quotient exactly and it offers {left[j+1]} as the quotient this time.",
-                    f"We'll now carry out the exact same procedure for the {left[j]}. We can divide {left[j]} by {primef[j]} and {left[j+1]} will be the quotient this time.",
-                    f"Now, divide the quotient by the smallest prime number that it can be divided by. The smallest prime number we need to divide the quotient exactly is {primef[j]}, and it this time provides {left[j+1]} as the quotient.",
-                    f"We’ll repeat the same process for {left[j]} now. We can divide it by {primef[j]} and we’ll get {left[j+1]} as a quotient.",
-                    f"Now we’ll divide {left[j]} by {primef[j]} as it is the smallest prime number to divide it exactly. {left[j+1]} is the quotient."
+                    f"Next, divide the quotient by the smallest prime number that it can be divided by, which is {primef[j]} in this case, and it gives {left[j+1]} as the next quotient.",
+                    f"Next, the smallest prime number that can divide {left[j+1]} without any remainder is {primef[j]}. So dividing by {primef[j]}, we get {left[j+1]} as the quotient.",
+                    f"Similarly, {primef[j]} can divide {left[j]} with a quotient of {left[j+1]}.",
+                    f"Next, {primef[j]} can divide {left[j]} with quotient {left[j+1]}, so write that down.",
+                    f"Again, {left[j]} is fully divisible by {primef[j]}, the prime number, with quotient {left[j+1]}, the non-prime number.",
+                    f"Now repeat the exact process for the quotient. It can be divided by {primef[j]} and {left[j+1]} will be the quotient this time.",
+                    f"Divide the quotient by the smallest prime number. {primef[j]} is the smallest prime number in this case to divide the quotient without any remainder and it yields {left[j+1]} as the quotient.",
+                    f"Carry out the exact same procedure for {left[j]}. We can divide {left[j]} by {primef[j]} and {left[j+1]} will be the quotient.",
+                    f"Now we’ll divide {left[j]} by {primef[j]} as it is the smallest prime number to divide it exactly. {left[j+1]} is the quotient.",
                 ]
                 content += self.wp_paragraph(
                     random.choice(loopInsideRandomString))
@@ -436,3 +458,15 @@ class DivisionMethod:
             content += self.wp_paragraph(random.choice(lastStep))
 
         return content
+
+
+if __name__ == "__main__":
+    n = 604
+    divisionImages = generateImages(n)['DivisionFiles']
+    numbers = [604]
+    
+    i = 0
+    divisionSteps = DivisionMethod(
+        n, numbers, i, divisionImages).divisionSteps()
+    postHtml = ""
+    # print(divisionSteps)

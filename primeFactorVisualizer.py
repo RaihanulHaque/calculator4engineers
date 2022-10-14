@@ -77,9 +77,9 @@ def drawCircleElement(circle: CircleObject, lines=True):
 count = 1
 
 
-def show(circle, n: int):
+def show(circle: CircleObject, n: int):
     rad = 60
-    scale = int(rad * 1.5)
+    scale = int(rad * 1.6) - rad
     global npImg
     global count
     if circle:
@@ -91,7 +91,8 @@ def show(circle, n: int):
             # print(f"{count} {int((count -1)/2) }")
             # plt.imshow(npImg)
             # plt.show()
-            saveImg(npImg[:int(scale+coeff * 5.2 * rad), :],
+            height = int(circle.center[1]) + rad + 20
+            saveImg(npImg[:height, :],
                     n, type="tree", step=str(coeff))
         count = count + 1
         drawCircleElement(circle)
@@ -110,10 +111,12 @@ def createTreeStructure(n: int):
     fileNames = []
     font = cv2.FONT_HERSHEY_SIMPLEX
     items = primeFactors(n)
-    height = int(60 * 4 * (len(items) + 1))
-    width = int((len(items) + 3) * 4 * 60)
     radius = 60
-    centerX = int(width/2) - radius*2
+    height = int(radius * 4 * (len(items)))
+    width = int((len(items) + 2) * 2 * radius)
+    if width < (radius*10):
+        width = radius*10
+    centerX = (radius * 3) + radius
     # centerX = radius*4
     centerY = int((3/2)*radius)
     center = (centerX, centerY)
@@ -131,12 +134,12 @@ def createTreeStructure(n: int):
     npImg[:, :, :] = 255
     logoImg = loadLogo(0.4)
     show(root, n)
-    endText = generateEndText(n, items=items)
-    pixValue = len(endText)*20
-    org = (int((width/2) - (pixValue/2)), height - 50)
-    cv2.putText(npImg, text=endText,
-                org=org, fontFace=font,
-                fontScale=1.2, color=(0, 0, 0), thickness=2)
+    # endText = generateEndText(n, items=items)
+    # pixValue = len(endText)*20
+    # org = (int((width/2) - (pixValue/2)), height - 50)
+    # cv2.putText(npImg, text=endText,
+    #             org=org, fontFace=font,
+    #             fontScale=1.2, color=(0, 0, 0), thickness=2)
     saveImg(npImg, n=n, type="tree", step=str(len(items)-1))
     # plt.imshow(npImg)
     # plt.show()
@@ -154,7 +157,9 @@ def createDivisionStructure(n):
     items = primeFactors(n)
     height = int((len(items) + 2) * 90) + 200
     logoPadding = 250
-    width = 800 + int(len(items)*30) + logoPadding
+    width = int(len(items)*40) + logoPadding
+    if width < 800:
+        width = 800
     npImg = np.zeros(shape=(height, width, 3), dtype=np.uint16)
     logoImg = loadLogo()
     npImg[:, :, :] = 255
@@ -169,24 +174,27 @@ def createDivisionStructure(n):
         # print(fontAdjustmentFactor) # Baka
         fontAdjustment2 = fontAdjustment2 * fontAdjustmentFactor
 
+        # putting divident numbers on screen
         cv2.putText(npImg, text=f"{key}",
                     org=(textX + 150, textY + i * increaseFactor), fontFace=font,
                     fontScale=fontScale, color=color1, thickness=3)
+        # putting the vertical line
         cv2.line(npImg,
                  pt1=(textX + 100, textY - 50),
                  pt2=(textX + 100, textY + i * increaseFactor),
                  color=(0, 0, 0),
                  thickness=3
                  )
-        if (i != 0):
+        if (i != 0):    # for avoiding saving the first image
             saveImg(img=npImg[:textY + i * increaseFactor + 100],
                     n=n, type="division", step=str(i))
+        # Putting the divisor text
         cv2.putText(npImg, text=f"{items[key]}",
                     org=(textX - fontAdjustment2, textY + i * increaseFactor), fontFace=font,
                     fontScale=fontScale, color=(255, 102, 0), thickness=3)
         cv2.line(npImg,
                  pt1=(int(textX/2), int(textY + 20 + i*increaseFactor)),
-                 pt2=(int(width-textX/2 - logoPadding),
+                 pt2=(int(width-textX/2),
                       int(textY + 20 + i*increaseFactor)),
                  color=(0, 0, 0), thickness=3
                  )
@@ -241,6 +249,9 @@ def loadLogo(factor=0.25):
 
 def addLogo(img):
     global logoImg
+    logoImgWidth = int(img.shape[1]/3)
+    logoImgHeight = int((logoImgWidth / logoImg.shape[1]) * logoImg.shape[0])
+    logoImg = cv2.resize(logoImg, (logoImgWidth, logoImgHeight))
     y_offset = 30
     y_end = y_offset + logoImg.shape[0]
     x_offset = img.shape[1] - logoImg.shape[1] - 30
@@ -252,7 +263,10 @@ def addLogo(img):
 def saveImg(img, n: int, type: str, step=''):
     global fileNames
     img = addLogo(img)
-    saveImg = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+    imgWidth = 1024
+    imgHeight = int((imgWidth / img.shape[1]) * img.shape[0])
+    imgResized = cv2.resize(img, (imgWidth, imgHeight))
+    saveImg = cv2.cvtColor(imgResized, cv2.COLOR_RGB2BGR)
     fileName = f"{IMG_STORAGE}/{IMG_PREFIX}_{n}_{type}_{step}.webp"
     fileNames.append(fileName)
     cv2.imwrite(fileName, saveImg, [int(cv2.IMWRITE_WEBP_QUALITY), 80])
@@ -302,7 +316,7 @@ def generateImages(n: int):
 fileNames = []
 
 if __name__ == "__main__":
-    n = 48
+    n = 20
     time1 = time.perf_counter()
     # createTreeStructure(n)
     # createDivisionStructure(n)

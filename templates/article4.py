@@ -217,7 +217,7 @@ class Post:
         h = self.wp_h2("Prime Factors by Definition")
         post += h
 
-        p = self.wp_paragraph("We should become familiar with the term \"prime factors\" before learning how to calculate them. What are prime factors ? Why are they known as prime factors ? A product's factors can be thought of as the multipliers of that product. And they can be referred to as prime factors if the multipliers are prime values. However, remember that a factor cannot be a fractional number. Therefore, only whole numbers may be used as multipliers. So, we can say, a number's factors are referred to be prime factors if they are prime numbers.")
+        p = self.wp_paragraph("We should become familiar with the term \"prime factors\" before learning how to calculate them. What are prime factors? Why are they known as prime factors? A product's factors can be thought of as the multipliers of that product. And they can be referred to as prime factors if the multipliers are prime values. However, remember that a factor cannot be a fractional number. Therefore, only whole numbers may be used as multipliers. So, we can say, a number's factors are referred to be prime factors if they are prime numbers.")
         post += p
 
         c = self.wp_paragraph_center("105 = 3 x 5 x 7")
