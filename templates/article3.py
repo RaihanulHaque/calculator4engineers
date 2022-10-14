@@ -184,8 +184,15 @@ class Post:
         return title
 
     def prepareIntro(self):
-        p1 = self.wp_paragraph(
-            f"Prime factors of {self.n} are {self.unique_primef(self.n)}.")
+
+        if (len(set(self.primef)) <= 1):
+            p1 = self.wp_paragraph(
+                f"Prime factor of {self.n} is {self.primef[0]}.")
+
+        else:
+            p1 = self.wp_paragraph(
+                f"Prime factors of {self.n} are {self.unique_primef(self.n)}.")
+
         p2 = self.wp_paragraph(
             f"Here, if we multiply {self.str_primef}, we’ll get {self.n} as the product. So, {self.str_primef} are the factors of {self.n}. As {self.unique_primef(self.n)} are prime numbers, they are also the prime factors of {self.n}.")
         intro = p1 + p2
@@ -396,7 +403,7 @@ class Post:
 
 if __name__ == "__main__":
 
-    post = Post(48)
+    post = Post(512)
     postHtml = ""
     # postHtml = "<html>"
     # postHtml += submitWP.title
@@ -408,4 +415,4 @@ if __name__ == "__main__":
 
     with open("view.html", "w") as htmlFile:
         htmlFile.write(postHtml)
-    print(submitWP.submit(post.title, content=postHtml))
+    # print(submitWP.submit(post.title, content=postHtml))

@@ -386,7 +386,7 @@ class Post:
 
 if __name__ == "__main__":
 
-    post = Post(56)
+    post = Post(48)
     postHtml = ""
     # postHtml = "<html>"
     # postHtml += submitWP.title
@@ -400,4 +400,4 @@ if __name__ == "__main__":
 
     with open("view.html", "w") as htmlFile:
         htmlFile.write(postHtml)
-    print(submitWP.submit(post.title, content=postHtml))
+    # print(submitWP.submit(post.title, content=postHtml))
