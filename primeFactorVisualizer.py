@@ -114,8 +114,8 @@ def createTreeStructure(n: int):
     radius = 60
     height = int(radius * 4 * (len(items)))
     width = int((len(items) + 2) * 2 * radius)
-    if width < (radius*10):
-        width = radius*10
+    if width < (1440):
+        width = 1440
     centerX = (radius * 3) + radius
     # centerX = radius*4
     centerY = int((3/2)*radius)
@@ -157,9 +157,9 @@ def createDivisionStructure(n):
     items = primeFactors(n)
     height = int((len(items) + 2) * 90) + 200
     logoPadding = 250
-    width = int(len(items)*40) + logoPadding
-    if width < 800:
-        width = 800
+    width = int(len(items)*50) + logoPadding
+    if width < 1200:
+        width = 1200
     npImg = np.zeros(shape=(height, width, 3), dtype=np.uint16)
     logoImg = loadLogo()
     npImg[:, :, :] = 255
@@ -192,9 +192,10 @@ def createDivisionStructure(n):
         cv2.putText(npImg, text=f"{items[key]}",
                     org=(textX - fontAdjustment2, textY + i * increaseFactor), fontFace=font,
                     fontScale=fontScale, color=(255, 102, 0), thickness=3)
+        # Putting horizontal line
         cv2.line(npImg,
                  pt1=(int(textX/2), int(textY + 20 + i*increaseFactor)),
-                 pt2=(int(width-textX/2),
+                 pt2=(int(width-logoPadding*2),
                       int(textY + 20 + i*increaseFactor)),
                  color=(0, 0, 0), thickness=3
                  )
@@ -316,7 +317,7 @@ def generateImages(n: int):
 fileNames = []
 
 if __name__ == "__main__":
-    n = 20
+    n = 32768
     time1 = time.perf_counter()
     # createTreeStructure(n)
     # createDivisionStructure(n)
