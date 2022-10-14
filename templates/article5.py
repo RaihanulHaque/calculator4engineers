@@ -191,7 +191,7 @@ class Post:
             p1 = self.wp_paragraph(
                 f"{self.unique_primef(self.n)} are the prime factors of {self.n}.")
         p2 = self.wp_paragraph(
-            f"{self.str_primef} are prime numbers and if we multiply them, we’ll get {self.n}. So, {self.unique_primef(self.n)} are the factors of {self.n}.")
+            f"{self.str_primef} are prime numbers and if we multiply them, we’ll get {self.n}. So, {self.unique_primef(self.n)} are the prime factors of {self.n}.")
         intro = p1 + p2
         intro += self.wp_table(
             f"""<tr>
