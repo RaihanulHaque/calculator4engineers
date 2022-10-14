@@ -112,33 +112,33 @@ class FactorTreeMethod:
         initialStep.append(
             f"Before we can begin to factor a given number, we need to write it down. {n} is the given number in this context. Get the first two factors of the number {n}. We'll begin with the smallest possible number, which is 2 (Note that we didn't pick 1, since every integer is divisible by both 1 and itself).<br><br>")
         initialStep.append(
-            f"Let’s take {n} as our given number. Now, we’ll write the root first. Then we’ll draw two arrows to link the first to branches or factors with the root. We’ll start trying from 2 and continue until we find a number that divides {n} exactly.<br><br>")
+            f"Let’s take {n} as our given number. Now, we’ll write the number as if it were a root of a tree. Then we’ll draw two arrows to link the root to its branches, which are actually the first two factors of the root. The first factor will be the prime number that we'll divide the root by, and the other factor will be resultant. Now, to find the prime factor of {n}, we’ll start trying from 2 and continue until we find a number that divides {n} exactly.<br><br>")
         initialStep.append(
             f"{n} is the given number whose factors are to be found. We’ll try to find its smallest factor which isn’t 1 as 1 is the divisor of every number & it isn’t a prime number. So let's begin with number 2.<br><br>")
         initialStep.append(f"Let's use the given number, {n}. We'll now start by writing the root. Then, we'll draw two arrows to connect the first to the root's branches or contributing elements. Starting with 2, we'll keep trying until we find a number that divides {n} perfectly. (Note that we didn't take 1 because every number can be divided by both 1 and the number itself).<br><br>")
-        initialStep.append(f"{n} is the targeted number whose factors are to be determined. We have to find the first two factors of {n}. We'll find if 2 is a factor of {n} because 2 is the smallest possible number we have in our hand(Note that we didn't pick 1, since 1 and the number itself are always the two factors of the given number).<br><br>")
+        initialStep.append(f"{n} is the targeted number whose factors are to be determined. We have to find the first two factors of {n}. We'll check if 2 is a factor of {n} because 2 is the smallest possible number we have in our hand (Note that we didn't pick 1, since 1 and the number itself are always the two factors of the given number).<br><br>")
         initialStep.append(
             f"The target number, for which the factors should be determined, is {n}. We'll try to find such two numbers which we can multiply to get {n}. But we won't use 1 because if we use 1, we have to multiply it with {n} to obtain {n} and it won't decompose our given number. So, we'll check if 2 is a factor of {n} since it's the smallest integer we can use.<br><br>")
 
 ######################################INITIAL STEP DIVIDED BY 2#########################################################################
 
         initialStepBy2.append(
-            f"With no leftover, {n} is divided by 2 in this instance. Therefore, the first two factors of {n} will be {primef[0]} and {left[1]}. We would continue exploring until we discovered a prime number that exactly divided {n} if it wasn't divisible by 2. ")
+            f"With no leftover, {n} is divided by 2 in this instance. Therefore, the first two factors of {n} will be {primef[0]} and {left[1]}. We would continue exploring until we discovered a prime number that exactly divided {n} if it wasn't divisible by 2.")
         initialStepBy2.append(
-            f"There are no leftovers when you split {n} by 2. Thus, {primef[0]} and {left[1]} will be the first two elements of {n}. If it wasn't divisible by 2, we would keep looking until we found a prime number that exactly divided {n}. ")
+            f"There are no leftovers when you split {n} by 2. Thus, {primef[0]} and {left[1]} will be the first two elements of {n}. If it wasn't divisible by 2, we would keep looking until we found a prime number that exactly divided {n}.")
         initialStepBy2.append(
-            f"Here {n} is divided by 2, leaving no remainder. The first two components of {n} will thus be {primef[0]} and {left[1]}. If it wasn't divisible by 2, we would keep looking until a prime number was found that exactly divided {n}. ")
+            f"Here {n} is divided by 2, leaving no remainder. The first two components of {n} will thus be {primef[0]} and {left[1]}. If it wasn't divisible by 2, we would keep looking until a prime number was found that exactly divided {n}.")
 
 ######################################INITIAL STEP NOT DIVIDED BY 2#########################################################################
 
         initialStepNotBy2.append(
-            f"Yet {n} cannot be divided by 2 without remainder. We'll give it a shot with {primef[0]}, since {n} is neatly divisible by that number. If it wasn't divisible by {primef[0]}, we'd keep looking until we found a prime number that exactly divided {n}. We’ll get {primef[0]} & {left[1]} as the first two factors of {n}. ")
+            f"As you can see, {n} cannot be divided by 2 without remainder. So we'll now check the next prime numbers (3, 5, 7, ...) ultil we found one that exactly divides {n}. We'll give it a shot with {primef[0]}, since {n} is neatly divisible by that number. If it wasn't divisible by {primef[0]}, we'd keep looking. So we got {primef[0]} & {left[1]} as the first two factors of {n}.")
         initialStepNotBy2.append(
             f"{primef[0]} divides {n} exactly and we get {primef[0]} & {left[1]} as two factors of {n}.")
         initialStepNotBy2.append(
-            f"{n} isn’t evenly divisible by 2. So, we’ll try with {primef[0]} and it is exactly divisible by {primef[0]} giving {primef[0]} & {left[1]} as the two factors of {n}. (Note: If it wasn’t divisible by {primef[0]}, we would’ve gone to the next number until we find the number which divides {n} exactly.) ")
+            f"{n} isn’t evenly divisible by 2. So, we’ll try with {primef[0]} and it is exactly divisible by {primef[0]} giving {primef[0]} & {left[1]} as the two factors of {n}. (Note: If it wasn’t divisible by {primef[0]}, we would’ve gone to the next prime number until we find the number which divides {n} exactly.) ")
         initialStepNotBy2.append(
-            f"Yet {n} cannot be divided by 2 without remainder. {primef[0]} divides {n} perfectly, giving us {primef[0]} and {left[1]} as two factors.")
+            f"In this case, {n} cannot be divided by 2 without remainder. But {primef[0]} divides {n} perfectly, giving us {primef[0]} and {left[1]} as two factors.")
         initialStepNotBy2.append(
             f"But 2 isn’t a factor of {n}. We'll give it a shot with {primef[0]}, since {n} is evenly divisible by that number, it is a factor of {n} along with {left[1]}. If it wasn't {primef[0]}, we'd keep looking until we found our first two factors of {n}.")
         initialStepNotBy2.append(
@@ -148,7 +148,7 @@ class FactorTreeMethod:
 
         lastStep = [
             f"Since {primef[len(primef)-2]} and {left[len(primef)-1]} are both prime numbers, they cannot be factored any further. With that, our factor tree is finished.",
-            f"{primef[len(primef)-2]} & {left[len(primef)-1]} are prime numbers. So, the process ends here & we got our prime factors. Else, we had to continue the process until every branch of the tree ultimately ended as a prime number. {str_primef} are the prime factors we’re looking for (As they’re at the top of the branches of our diagram & no branches are coming out of them).",
+            f"{primef[len(primef)-2]} & {left[len(primef)-1]} are prime numbers. So, the process ends here & we got our prime factors. Else, we had to continue the process until every branch of the tree ultimately ended as a prime number.",
             f"Both {primef[len(primef)-2]} and {left[len(primef)-1]} are prime numbers, so we won’t get anything else rather than 1 & the number itself by factoring them again. So, our factor tree is completed.",
             f"{primef[len(primef)-2]} & {left[len(primef)-1]} are the two factors of {left[len(primef)-2]}, both of which are prime numbers. This concludes the procedure, and we now have our prime factors. If not, we were to keep going until each branch of the tree resulted in a prime number.",
             f"Since {primef[len(primef)-2]} and {left[len(primef)-1]} are both prime numbers, it cannot be factored any further. With that, our factor tree is finished.",
@@ -332,19 +332,22 @@ class DivisionMethod:
 
         # ]
         initialStepBy2 = [
-            f"Let’s find out the prime factors of {n} by division method. First we’ll divide the {n} by the smallest prime number 2. And 2 can easily divide {n}. This gives us {left[1]} as a quotient. So, we have to move towards the next one.",
-            f"To find the prime factors, first write the number {n} on the paper and check if it is divisible by the smallest prime number which is certainly 2 and exactly divides {n} which gives us a quotient of {left[1]}. After that we would look for the next one. Remember the divisor must be a prime number.",
-            f"Let’s find out the prime factors of {n} by division method. Divide {n} by 2 as it is the smallest prime number. It accurately divides {n}.",
-            f"Let’s implement the division method on {n} to find out its prime factors. First we’ll try to divide the {n} by 2 as 2 is the smallest prime number. Here 2 can exactly divide {n} with giving us a quotient of {left[1]}. So we’ll start looking for next one if it's possible."
+            f"Let’s find out the prime factors of {n} by division method. First we’ll divide {n} by the smallest prime number 2. And 2 can easily divide {n}. This gives us {left[1]} as a quotient. So, we have to move towards the next one.",
+            f"To find the prime factors, first write the number {n} on the paper and check if it is divisible by the smallest prime number which is certainly 2 and exactly divides {n} which gives us a quotient of {left[1]}. After that, we would look for the next one. Remember the divisor must be a prime number.",
+            f"Let’s find out the prime factors of {n} by division method. Divide {n} by 2 as it is the smallest prime number. It divides {n} without any leftover.",
+            f"Let’s implement the division method on {n} to find out its prime factors. First we’ll try to divide {n} by 2 as 2 is the smallest prime number. Here 2 can exactly divide {n} with giving us a quotient of {left[1]}. W’ll continue looking for next prime number when the quotient is not 1.",
+            f"To find the first prime factor of {n}, divide it by the smallest prime factor 2. In this case, 2 divides {n} with no leftover, so this is our first prime number. If 2 couldn't exactly divide {n}, then we would use the next prime number one by one (3, 5, 7, 11, ...) to see which one could divide without any leftover.",
+            f"Divide the target number {n} by the prime numbers 2, 3, 5, 7, ... The smallest prime number that can divide {n} without any fraction quotient is the first prime number we're looking for."
         ]
 
         initialStepNotBy2 = [
-            f"Let’s find out the prime factors of {n} by division method. First we’ll divide the {n} by the smallest prime number 2. But 2 can’t divide {n} exactly. So, we have to move towards the next one. {primef[0]} can divide {left[0]} evenly. So, we’ll divide it by {primef[0]} and get {left[1]} as the quotient.",
+            f"Let’s find out the prime factors of {n} by division method. First we’ll divide {n} by the smallest prime number 2. But 2 can’t divide {n} exactly. So, we have to move towards the next one. As you can guess, no smaller prime number than {primef[0]} can divide {left[0]} evenly. By dividing {n} by {primef[0]}, we get {left[1]} as the quotient.",
             f"To find the prime factors, first write the number {n} on the paper and check if it is divisible by the smallest prime number which is certainly 2. If it isn’t, then go for the next one. Remember the divisor must be a prime number & we should start from the smallest. In case {n}, it is evenly divisible by {primef[0]}. The quotient will be {left[1]} after dividing by {primef[0]}.",
-            f"Let’s find out the prime factors of {n} by division method. Divide {n} by 2 as it is the smallest prime number. If 2 can’t divide {n} exactly, try with {primef[0]} as it is the next prime number. {primef[0]} can divide {n} evenly and we’ll get {left[1]} as the quotient.",
             f"Write the number {n} down first to find its prime factors, then see if it can be divided by the smallest prime number, which is definitely 2. If 2 doesn't divide {n} precisely, move on to the following. Keep in mind that we must begin with the smallest divisor and it has to be a prime number. The number {n} can be divided by {primef[0]} evenly to obtain the quotient of {left[1]}.",
             f"Let’s implement the division method on {n} to find out its prime factors. First we’ll try to divide the {n} by 2 as 2 is the smallest prime number. But 2 can’t divide {n} exactly. So, we’ll try with {primef[0]} this time as {primef[0]} is the next prime number which can divide {n} evenly giving {left[1]} as the quotient.",
-            f"Let's use the division method to find the prime factors of {n}. As {primef[0]} is the smallest prime number which can divide {n} exactly. Our quotient will be {left[1]}."
+            f"Let's use the division method to find the prime factors of {n}. {primef[0]} is the smallest prime number which can divide {n} exactly. So our quotient will be {left[1]}.",
+            f"Use the figure to find the prime factors using division method. See if {n} can be divided by 2. Here, it's not. So we'll check the next prime number (2, 3, 5, 7, ...). No prime number smaller than {primef[0]} can divide {n} exactly, so {primef[0]} is our first prime number which gives {left[1]} as the quotient to find the next prime number."
+            f"Divide {n} by the prime numbers 2, 3, 5, 7, etc. See which smallest prime number can divide {n} without any fraction quotient. In this case, {primef[0]} is our first prime number which gives the quotient {left[1]}. We'll continue doing the same until the quotient becomes 1."
         ]
 
 ######################################INITIAL STEP DIVIDED BY 2#########################################################################
@@ -357,7 +360,7 @@ class DivisionMethod:
 
         lastStep = [
             f"Being a prime, {left[len(primef)-1]} can be evenly divided only by itself and the quotient will become 1. A prime factorization of {n} would include all of its divisors.<br><strong>Note: We’ll have to repeat the process until the quotient becomes 1.</strong>",
-            f"As {left[len(primef)-1]} is a prime number, the smallest & only prime number to divide {left[len(primef)-1]} exactly is {left[len(primef)-1]} itself and leaves 1 as quotient. So, we found the quotient 1 & the division method is done. Now it’s time to find the prime factors. And the prime factors are the divisors. Hence, we got {str_primef} as the prime factors of {n}.<br><strong>Note: We’ll have to repeat the process until the quotient becomes 1.</strong>",
+            f"As {left[len(primef)-1]} is a prime number, the smallest & only prime number to divide {left[len(primef)-1]} exactly is {left[len(primef)-1]} itself and leaves 1 as quotient. So, we found the quotient 1 hence the division method is done. <br><br> We got {str_primef} as the prime factors of {n}.<br><strong>Note: We’ll have to repeat the process until the quotient becomes 1.</strong>",
             f"As {left[len(primef)-1]} is a prime number, it can be divided evenly only by itself. Each divisor is a prime {n} factor. The result of multiplying all the divisors is {n}.<br><strong>Note: We’ll have to repeat the process until the quotient becomes 1.</strong>",
             f"Due to the fact that {left[len(primef)-1]} is a prime number, the only prime number that can divide it exactly is {left[len(primef)-1]} (prime numbers can only be divided by 1 and the number itself). So, we found quotient 1 and completed the division procedure.  The prime factors are the divisors used to divide the number and its quotients.<br><strong>Note: We’ll have to repeat the process until the quotient becomes 1.</strong>",
             f"Being a prime, {left[len(primef)-1]} can be evenly divided only by itself and the quotient will become 1. A prime factorization of {n} would include all of its divisors.<br><strong>Note: We’ll have to repeat the process until the quotient becomes 1.</strong>",
@@ -448,6 +451,9 @@ class DivisionMethod:
                     f"Divide the quotient by the smallest prime number. {primef[j]} is the smallest prime number in this case to divide the quotient without any remainder and it yields {left[j+1]} as the quotient.",
                     f"Carry out the exact same procedure for {left[j]}. We can divide {left[j]} by {primef[j]} and {left[j+1]} will be the quotient.",
                     f"Now we’ll divide {left[j]} by {primef[j]} as it is the smallest prime number to divide it exactly. {left[j+1]} is the quotient.",
+                    f"{primef[j]} is the smallest prime number in this case to divide the quotient without any remainder with a new quotient of {left[j+1]}.",
+                    f"Next, {primef[j]} divides {left[j]} exactly with a quotient of {left[j+1]}.",
+                    f"As you can guess, {primef[j]} is our next prime number which gives the quotient {left[j+1]}"
                 ]
                 content += self.wp_paragraph(
                     random.choice(loopInsideRandomString))
