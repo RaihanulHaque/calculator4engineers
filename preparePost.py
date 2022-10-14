@@ -23,7 +23,8 @@ def schedule(current_time):
 # n = 10361
 current_time = datetime.now()
 # numbers = [601, 604, 613, 10365, 631, 632, 633, 634]
-numbers = [2**8, 2**9, 2**10]
+# numbers = [2**8, 2**9, 2**10]
+numbers = [512, 512, 512, 512, 600, 600, 600, 600]
 
 for i in range(0, len(numbers)):
     n = numbers[i]

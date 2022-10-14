@@ -48,7 +48,7 @@ class Post:
         for x in range(0, len(unique_arr) - 1):
             str_unique += f"{unique_arr[x]}, "
         if len(unique_arr) == 1:
-            str_unique = f"{str_unique[:-2]}"
+            str_unique = f"{unique_arr[0]}"
         else:
             str_unique = f"{str_unique[:-2]} and {unique_arr[len(unique_arr)-1]}"
         return str_unique

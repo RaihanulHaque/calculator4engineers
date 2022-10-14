@@ -386,7 +386,7 @@ class Post:
 
 if __name__ == "__main__":
 
-    post = Post(48)
+    post = Post(512)
     postHtml = ""
     # postHtml = "<html>"
     # postHtml += submitWP.title

@@ -45,15 +45,13 @@ class Post:
 
     def unique_primef(self, n):
         unique_arr = [*set(self.primef)]
-        # unique_arr = set(self.primef)
         str_unique = ""
         for x in range(0, len(unique_arr) - 1):
             str_unique += f"{unique_arr[x]}, "
         if len(unique_arr) == 1:
-            str_unique = f"{str_unique[:-2]}"
+            str_unique = f"{unique_arr[0]}"
         else:
             str_unique = f"{str_unique[:-2]} and {unique_arr[len(unique_arr)-1]}"
-        print(str_unique)
         return str_unique
 
     def exponential(self, array):
